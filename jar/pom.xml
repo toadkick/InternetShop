@@ -8,20 +8,20 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>ejb</artifactId>
+    <artifactId>jar</artifactId>
     <packaging>jar</packaging>
+
     <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-ejb-plugin</artifactId>
-                <version>2.3</version>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.2</version>
                 <configuration>
-                    <ejbVersion>3.1</ejbVersion>
+                    <source>1.8</source>
+                    <target>1.8</target>
                 </configuration>
-
             </plugin>
         </plugins>
     </build>
-
 </project>
