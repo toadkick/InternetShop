@@ -15,7 +15,7 @@
 
         <dependency>
             <groupId>com.eshop.products</groupId>
-            <artifactId>ejb</artifactId>
+            <artifactId>jar</artifactId>
             <version>${project.version}</version>
             <type>jar</type>
             <scope>provided</scope>
