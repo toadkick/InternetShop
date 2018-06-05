@@ -1,4 +1,5 @@
 -- created by Roman Kraskovskiy
+
 drop table authorities;
 drop table cart_products;
 drop table products;
@@ -9,6 +10,7 @@ drop table cart;
 drop table shop_users;
 
 -- creating tables
+
 create table shop_users (login varchar2(20) primary key,password varchar2(20),phone varchar2(9),e_mail varchar2(50));
 create table authorities (user_role varchar2(10) primary key,login varchar2(20),authority varchar2(15));
 create table cart(cart_id number primary key,login varchar2(20));
@@ -19,6 +21,7 @@ create table product_attribute_value(product_attribute_value_id number primary k
 create table attribute(attribute_id number primary key,attribute_name varchar2(20));
 
 -- adding references(foreign keys)
+
 alter table authorities add  foreign key (login) references shop_users (login);
 alter table cart add  foreign key (login) references shop_users (login);
 alter table cart_products add  foreign key (cart_id) references cart (cart_id);
