@@ -1,5 +1,4 @@
 -- created by Roman Kraskovskiy
-
 drop table authorities;
 drop table cart_products;
 drop table products;
