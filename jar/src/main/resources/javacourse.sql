@@ -25,4 +25,4 @@ alter table cart_products add  foreign key (cart_id) references cart (cart_id);
 alter table cart_products add  foreign key (product_id) references products (product_id);
 alter table products add  foreign key (category_id) references category (category_id);
 alter table product_attribute_value add  foreign key (product_id) references products (product_id);
-alter table product_attribute_value add  foreign key (attribute_id) references attribute (attribute_id); 
+alter table product_attribute_value add  foreign key (attribute_id) references attribute (attribute_id);
