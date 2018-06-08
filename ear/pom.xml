@@ -29,12 +29,15 @@
                 <artifactId>maven-ear-plugin</artifactId>
                 <version>2.3.2</version>
                 <configuration>
+                    <finalName>war</finalName>
+                    <displayName>war</displayName>
+                    <defaultLibBundleDir>lib/</defaultLibBundleDir>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                        </manifest>
+                    </archive>
                     <modules>
-                        <archive>
-                            <manifest>
-                                <addClasspath>true</addClasspath>
-                            </manifest>
-                        </archive>
                         <webModule>
                             <groupId>com.eshop.products</groupId>
                             <artifactId>war</artifactId>
