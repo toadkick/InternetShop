@@ -1,0 +1,2 @@
+# InternetShop
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/659470ccf26945159a718224f0756621)](https://app.codacy.com/app/CDP1988/InternetShop?utm_source=github.com&utm_medium=referral&utm_content=toadkick/InternetShop&utm_campaign=badger)
