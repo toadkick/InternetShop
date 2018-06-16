@@ -1,4 +1,4 @@
 package com.eshop.products.controllers;
 
-public class CartService {
+public class UserController {
 }
