@@ -12,9 +12,8 @@
     <title>Title home jsp</title>
 </head>
 <body>
- <jsp:include page="_header.jsp"/>
- <jsp:include page="_menu.jsp"/>
-        Nice eshop by the authors of SEA BATTLE.
- <jsp:include page="_footer.jsp"/>
+
+<jsp:forward page="WEB-INF/pages/home.jsp"/>
+
 </body>
 </html>
