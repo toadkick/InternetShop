@@ -18,7 +18,7 @@
 
     | &nbsp;
 
-    <a href="${pageContext.request.contextPath}/productList">Products</a>
+    <a href="viewAll">Products</a>
 
     <c:if test="${pageContext.request.userPrincipal.name != null}">
 

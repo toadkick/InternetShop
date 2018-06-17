@@ -12,6 +12,21 @@ public class Product {
     private int count;
     private Date date;
 
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "productID=" + productID +
+                ", categoryID=" + categoryID +
+                ", name='" + name + '\'' +
+                ", author='" + author + '\'' +
+                ", parentID=" + parentID +
+                ", price=" + price +
+                ", count=" + count +
+                ", date=" + date +
+                '}';
+    }
+
     public int getProductID() {
         return productID;
     }
