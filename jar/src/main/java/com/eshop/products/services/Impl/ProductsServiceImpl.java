@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.ArrayList;
 import java.util.List;
 
+@Controller
 public class ProductsServiceImpl implements ProductsService {
     @Autowired
     private ProductDAOImpl productDAO;
@@ -22,17 +23,5 @@ public class ProductsServiceImpl implements ProductsService {
     public ModelAndView showAllProducts() {
         productList = productDAO.getAllProducts();
         return  new ModelAndView("productList", "list", productList);
-    }
-
-    //TODO this
-    @Override
-    public ModelAndView showProductsByCategory() {
-        return null;
-    }
-
-    //TODO this
-    @Override
-    public ModelAndView showProductsByName() {
-        return null;
     }
 }
