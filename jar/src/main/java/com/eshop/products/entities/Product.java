@@ -10,8 +10,21 @@ public class Product {
     private int parentID;
     private double price;
     private int count;
-    private Date date;
+    private int date;
 
+    public Product() {
+    }
+
+    public Product(int productID, int categoryID, String name, String author, int parentID, double price, int count, int date) {
+        this.productID = productID;
+        this.categoryID = categoryID;
+        this.name = name;
+        this.author = author;
+        this.parentID = parentID;
+        this.price = price;
+        this.count = count;
+        this.date = date;
+    }
 
     @Override
     public String toString() {
@@ -83,11 +96,11 @@ public class Product {
         this.count = count;
     }
 
-    public Date getDate() {
+    public int getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(int date) {
         this.date = date;
     }
 }

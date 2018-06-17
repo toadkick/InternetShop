@@ -1,7 +1,9 @@
 package com.eshop.products.services;
 
-import org.springframework.web.servlet.ModelAndView;
+import com.eshop.products.entities.Product;
+import java.util.List;
 
 public interface ProductsService {
-    ModelAndView showAllProducts();
+    List<Product> showAllProducts();
+    List<Product> showAllCategories();
 }

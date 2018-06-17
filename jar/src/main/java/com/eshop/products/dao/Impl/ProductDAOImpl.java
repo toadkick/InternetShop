@@ -4,11 +4,13 @@ import com.eshop.products.dao.ProductDAO;
 import com.eshop.products.entities.Product;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Component;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
-
+@Component
 public class ProductDAOImpl implements ProductDAO {
     private JdbcTemplate template;
 
@@ -18,7 +20,16 @@ public class ProductDAOImpl implements ProductDAO {
 
     @Override
     public List<Product> getAllProducts() {
-        return template.query("select * from products", new ProductRowMap());
+        List<Product> lp = new ArrayList<Product>();
+        lp.add(new Product(1,2,"JavaBook","Blockh",2,200,5,2015));
+        lp.add(new Product(2,2,"JavaBook2","Blockh",2,400,5,2014));
+        lp.add(new Product(3,2,"JavaBook3","Blockh",2,500,3,2012));
+        return lp;
+        //return template.query("select * from products", new ProductRowMap());
+    }
+
+    public List<Product> getAllCategories() {
+        return null;
     }
 
     @Override
@@ -43,7 +54,7 @@ public class ProductDAOImpl implements ProductDAO {
             products.setParentID(resultSet.getInt(5));
             products.setPrice(resultSet.getDouble(6));
             products.setCount(resultSet.getInt(7));
-            products.setDate(resultSet.getDate(8));
+            products.setDate(resultSet.getInt(8));
             return products;
         }
     }

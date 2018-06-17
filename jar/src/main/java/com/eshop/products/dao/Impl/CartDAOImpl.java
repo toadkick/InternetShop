@@ -36,7 +36,7 @@ public class CartDAOImpl implements CartDAO {
             products.setParentID(resultSet.getInt(5));
             products.setPrice(resultSet.getDouble(6));
             products.setCount(resultSet.getInt(7));
-            products.setDate(resultSet.getDate(8));
+            products.setDate(resultSet.getInt(8));
             return products;
         }
     }

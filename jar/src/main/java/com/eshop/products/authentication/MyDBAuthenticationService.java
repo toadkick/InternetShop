@@ -21,7 +21,7 @@ public class MyDBAuthenticationService implements UserDetailsService {
     private UserDAO userDAO;
 
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Account account = userDAO.findByLogin(username);
+        Account account = userDAO.findByLogin(username).get(0);
 
         if (account == null) {
             throw new UsernameNotFoundException("Account " //

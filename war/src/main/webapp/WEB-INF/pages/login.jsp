@@ -27,6 +27,7 @@
 </c:if>
 
 <h3>Enter user name and password:</h3>
+<a href="${pageContext.request.contextPath}/register">Register</a>
 
 <form name='f' action="${pageContext.request.contextPath}/j_spring_security_check" method='POST'>
     <table>
