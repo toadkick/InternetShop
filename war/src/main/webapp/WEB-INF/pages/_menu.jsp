@@ -14,11 +14,11 @@
 
     | &nbsp;
 
-    <a href="/category">Categories</a>
+    <a href="category">Categories</a>
 
     | &nbsp;
 
-    <a href="${contextPath}/AllProductList">Products</a>
+    <a href="AllProductList">Products</a>
 
     <c:if test="${pageContext.request.userPrincipal.name != null}">
 
