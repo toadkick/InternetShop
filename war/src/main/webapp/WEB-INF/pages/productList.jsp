@@ -12,6 +12,9 @@
     <title>Title</title>
 </head>
 <body>
+<jsp:include page="_header.jsp"/>
+<jsp:include page="_menu.jsp"/>
+
 <h1>all products</h1>
 <table border = "2" >
     <tr>
@@ -33,5 +36,7 @@
         </tr>
     </c:forEach>
 </table>
+
+<jsp:include page="_footer.jsp"/>
 </body>
 </html>

@@ -10,15 +10,15 @@
 
 <div style="border: 1px solid #ccc;padding:5px;margin-bottom:20px;">
 
-    <a href="/home">Home</a>
+    <a href="${pageContext.request.contextPath}/home">Home</a>
 
     | &nbsp;
 
-    <a href="category">Categories</a>
+    <a href="${pageContext.request.contextPath}/category">Categories</a>
 
     | &nbsp;
 
-    <a href="AllProductList">Products</a>
+    <a href="${pageContext.request.contextPath}/productList">Products</a>
 
     <c:if test="${pageContext.request.userPrincipal.name != null}">
 
