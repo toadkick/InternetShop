@@ -11,6 +11,9 @@
     <title>Title</title>
 </head>
 <body>
-
+<jsp:include page="_header.jsp"/>
+<jsp:include page="_menu.jsp"/>
+categories
+<jsp:include page="_footer.jsp"/>
 </body>
 </html>
