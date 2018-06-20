@@ -23,10 +23,10 @@ public class ProductController {
         return new ModelAndView("productList", "list", productList);
     }*/
 
-    @RequestMapping("/productList")
+    @RequestMapping("/AllProductList")
     public String showAllProducts(Model model) {
-        List<Product> pl = productsService.showAllProducts();
-        model.addAttribute("list", pl);
+        List<Product> productList = productsService.showAllProducts();
+        model.addAttribute("list", productList);
         return "productList";
     }
 
