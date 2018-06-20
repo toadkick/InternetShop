@@ -21,11 +21,6 @@ public class ProductDAOImpl implements ProductDAO {
 
     @Override
     public List<Product> getAllProducts() {
-       /* List<Product> lp = new ArrayList<Product>();
-        lp.add(new Product(1,2,"JavaBook","Blockh",2,200,5,2015));
-        lp.add(new Product(2,2,"JavaBook2","Blockh",2,400,5,2014));
-        lp.add(new Product(3,2,"JavaBook3","Blockh",2,500,3,2012));
-        return lp;*/
         return template.query("select * from products", new ProductRowMap());
     }
 

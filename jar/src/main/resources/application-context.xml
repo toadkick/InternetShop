@@ -20,12 +20,17 @@
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="${ds.database-driver}"/>
         <property name="url" value="${ds.url}"/>
-        <property name="username" value="student"/>
-        <property name="password" value="student"/>
+        <property name="username" value="${ds.username}"/>
+        <property name="password" value="${ds.password}"/>
     </bean>
 
     <bean id = "jdbcTemplate" class = "org.springframework.jdbc.core.JdbcTemplate">
         <property name = "dataSource" ref = "dataSource"/>
     </bean>
+
+    <!-- this broke program , but without template null-->
+   <!-- <bean id = "dao" class = "com.eshop.products.dao.Impl.ProductDAOImpl">
+        <property name = "template" ref = "jdbcTemplate"/>
+    </bean> -->
 
 </beans>
