@@ -12,7 +12,6 @@ import java.util.List;
 @Service
 public class ProductsServiceImpl implements ProductsService {
 
-    @Qualifier("productDAOImpl")
     @Autowired
     private ProductDAO productDAO;
 

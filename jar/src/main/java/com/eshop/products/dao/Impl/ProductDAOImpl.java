@@ -3,6 +3,7 @@ package com.eshop.products.dao.Impl;
 import com.eshop.products.dao.ProductDAO;
 import com.eshop.products.entities.Product;
 import com.eshop.products.entities.ProductRowMap;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 @Component
 public class ProductDAOImpl implements ProductDAO {
+    @Autowired
     private JdbcTemplate template;
 
     public void setTemplate(JdbcTemplate template) {
