@@ -7,6 +7,8 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib uri = "http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="spring" uri="http://java.sun.com/jstl/core" %>
+<spring:url value="/product" var="showProduct"/>
 <html>
 <head>
     <title>Title</title>
@@ -24,6 +26,8 @@
         <th>Author</th>
         <th>Price</th>
         <th>Date</th>
+        <th>Info</th>
+
     </tr>
     <c:forEach var = "product" items = "${list}">
         <tr>
@@ -33,6 +37,8 @@
             <td>${product.author}</td>
             <td>${product.price}</td>
             <td>${product.date}</td>
+            <td><a href="${showProduct}/${product.productID}">INFO</a></td>>
+
         </tr>
     </c:forEach>
 </table>

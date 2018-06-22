@@ -5,6 +5,7 @@ import com.eshop.products.services.ProductsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,23 +25,17 @@ public class ProductController {
         return new ModelAndView("productList", "list", productList);
     }
 
-/*    @RequestMapping("/AllProductList")
-    public String showAllProducts(Model model) {
-        List<Product> pl = productsService.showAllProducts();
-        model.addAttribute("list", pl);
-        return "productList";
-    }*/
-
-/*    @RequestMapping("/category")
-    public String showAllCategories(Model model) {
-        List<Product> categoryList = productsService.showAllCategories();
-        model.addAttribute("list", categoryList);
-        return "category";
-    }*/
-
     @RequestMapping("/category")
     public ModelAndView showAllCategories() {
         List<Product> categoryList = productsService.showAllCategories();
         return new ModelAndView("category", "list", categoryList);
     }
+
+    @RequestMapping(value = "/product/{id}", method = RequestMethod.GET)
+    public ModelAndView productById(@PathVariable("id") int id) {
+        //Product product = productsService.showProduct(id);
+        Product product = new Product();
+        return new ModelAndView("product", "product", product);
+    }
+
 }
