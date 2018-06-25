@@ -7,28 +7,9 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 
-<%--
-<div style="border: 1px solid #ccc;padding:5px;margin-bottom:20px;">
-
-    <a href="${pageContext.request.contextPath}/home">Home</a>
-
-    | &nbsp;
-
-    <a href="${pageContext.request.contextPath}/category">Categories</a>
-
-    | &nbsp;
-
-    <a href="${pageContext.request.contextPath}/AllProductList">Products</a>
-
-    <c:if test="${pageContext.request.userPrincipal.name != null}">
-
-        | &nbsp;
-        <a href="${pageContext.request.contextPath}/logout">Logout</a>
-
-    </c:if>
-</div>--%>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="${pageContext.request.contextPath}/home">E-Shop</a>
@@ -56,9 +37,15 @@
                 </c:if>
             </li>>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
+        <form:form class="form-inline my-2 my-lg-0" action="${pageContext.request.contextPath}/search" method="get">
+            <input name="searchVal" class="form-control mr-sm-2" placeholder="Search" type="text"/>
+            <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+        </form:form>
+
+
+<%--        <form class="form-inline my-2 my-lg-0" method="post" action="${pageContext.request.contextPath}/search" >
             <input class="form-control mr-sm-2" placeholder="Search" type="text">
             <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-        </form>
+        </form>--%>
     </div>
 </nav>

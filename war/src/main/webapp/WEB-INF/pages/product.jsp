@@ -22,6 +22,8 @@
         <th>Author</th>
         <th>Price</th>
         <th>Date</th>
+        <th>Buy</th>
+
 
     </tr>
     <c: var = "product" item = "${product}">
@@ -32,6 +34,8 @@
             <td>${product.author}</td>
             <td>${product.price}</td>
             <td>${product.date}</td>
+            <td>Buy</td>
+
 
         </tr>
     </c:>

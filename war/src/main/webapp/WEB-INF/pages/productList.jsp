@@ -17,7 +17,7 @@
 <jsp:include page="_header.jsp"/>
 <jsp:include page="_menu.jsp"/>
 
-<h1>all products</h1>
+<h1>product list</h1>
 <table border = "2" >
     <tr>
         <th>ID</th>
@@ -37,7 +37,7 @@
             <td>${product.author}</td>
             <td>${product.price}</td>
             <td>${product.date}</td>
-            <td><a href="${showProduct}/${product.productID}">INFO</a></td>>
+            <td><a href="${showProduct}/${product.productID}">INFO</a></td>
 
         </tr>
     </c:forEach>
