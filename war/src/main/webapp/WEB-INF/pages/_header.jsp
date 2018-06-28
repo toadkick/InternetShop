@@ -23,6 +23,6 @@
         </c:if>
     </div>
     <div class="cart-bar">
-            <a href="${pageContext.request.contextPath}/cart">Login</a>
+            <a href="${pageContext.request.contextPath}/cart">Cart</a>
     </div>
 </div>

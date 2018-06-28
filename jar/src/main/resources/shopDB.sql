@@ -8,6 +8,7 @@ drop table products;
 drop table category;
 drop table authorities;
 drop table shop_users;
+drop SEQUENCE cart_product_seq;
 
 -- creating tables
 create table shop_users (login varchar2(20) primary key,password varchar2(20),phone varchar2(9),e_mail varchar2(50));
