@@ -28,3 +28,6 @@ alter table products add  foreign key (category_id) references category (categor
 alter table product_attribute_value add  foreign key (product_id) references products (product_id);
 alter table product_attribute_value add  foreign key (attribute_id) references attribute (attribute_id);
 alter table category add UNIQUE (category_id,parent_category_id);
+
+-- adding sequence
+create sequence cart_product_seq start with 1 increment by 1;
