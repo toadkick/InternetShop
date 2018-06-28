@@ -4,17 +4,21 @@ import com.eshop.products.dao.CartDAO;
 import com.eshop.products.entities.Account;
 import com.eshop.products.entities.Product;
 import com.eshop.products.entities.ProductRowMap;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowCallbackHandler;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+@Repository
 public class CartDAOImpl implements CartDAO {
     private JdbcTemplate template;
 
+    @Autowired
     public void setTemplate(JdbcTemplate template) {
         this.template = template;
     }

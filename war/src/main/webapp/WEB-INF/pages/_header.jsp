@@ -22,4 +22,7 @@
             <a href="${pageContext.request.contextPath}/login">Login</a>
         </c:if>
     </div>
+    <div class="cart-bar">
+            <a href="${pageContext.request.contextPath}/cart">Login</a>
+    </div>
 </div>
