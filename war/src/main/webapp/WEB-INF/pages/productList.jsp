@@ -9,39 +9,43 @@
 <%@taglib uri = "http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="spring" uri="http://java.sun.com/jstl/core" %>
 <spring:url value="/product" var="showProduct"/>
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+      integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 <html>
 <head>
-    <title>Title</title>
+    <title>Product list</title>
 </head>
 <body>
 <jsp:include page="_header.jsp"/>
 <jsp:include page="_menu.jsp"/>
 
-<h1>product list</h1>
-<table border = "2" >
-    <tr>
-        <th>ID</th>
-        <th>Cat_ID</th>
-        <th>Name</th>
-        <th>Author</th>
-        <th>Price</th>
-        <th>Date</th>
-        <th>Info</th>
+<div class="card-deck-wrapper">
+    <div class="card-columns">
 
-    </tr>
-    <c:forEach var = "product" items = "${list}">
-        <tr>
-            <td>${product.productID}</td>
-            <td>${product.categoryID}</td>
-            <td>${product.name}</td>
-            <td>${product.author}</td>
-            <td>${product.price}</td>
-            <td>${product.date}</td>
-            <td><a href="${showProduct}/${product.productID}">INFO</a></td>
+        <c:forEach var="product" items="${list}">
 
-        </tr>
-    </c:forEach>
-</table>
+            <div class="card" style="padding: 20px; background-color: #cccccc">
+                <img class="card-img-top" src="resources/image/book.gif" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">${product.name}</h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"  style="background-color: darkgrey">AUTHOR - ${product.author}</li>
+                    <li class="list-group-item"  style="background-color: darkgrey">YEAR - ${product.date}</li>
+                    <li class="list-group-item"  style="background-color: darkgrey">PRICE - ${product.price}$</li>
+                </ul>
+                <div class="card-body">
+                    <a href="${showProduct}/${product.productID}" class="card-link">INFO</a>
+                    <a href="#" class="card-link">Add to cart</a>
+                </div>
+            </div>
+
+        </c:forEach>
+
+    </div>
+</div>
 
 <jsp:include page="_footer.jsp"/>
 </body>
