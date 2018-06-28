@@ -25,4 +25,15 @@ public class CartDAOImpl implements CartDAO {
                         "join CART_PRODUCTS cp on(p.PRODUCT_ID=cp.PRODUCT_ID) where cp.CART_ID="+cartID,
                 new ProductRowMap());
     }
+
+    @Override
+    public void addProductInCart(int productID, int cartID, int count) {
+        template.update("insert INTO CART_PRODUCTS VALUES (cart_product_seq.nextval," + cartID +
+                "," + productID + "," + count + ")");
+    }
+
+    @Override
+    public void removeProductFromCart(int productID, int cartID) {
+        template.update("delete from CART_PRODUCTS where CART_ID=" + cartID + " and PRODUCT_ID=" + productID);
+    }
 }

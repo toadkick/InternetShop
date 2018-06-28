@@ -34,7 +34,7 @@
             <td>${product.author}</td>
             <td>${product.price}</td>
             <td>${product.date}</td>
-            <td>Buy</td>
+            <td><button href="#">Buy</button></td>
 
 
         </tr>
