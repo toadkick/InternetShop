@@ -7,11 +7,16 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
+<%@ taglib prefix="spring" uri="http://java.sun.com/jstl/core" %>
+<spring:url var="loginURL" value="/j_spring_security_check"/>
 <!DOCTYPE html>
+
 <html>
 <head><title>Login</title></head>
 <body>
-<jsp:include page="_menu.jsp" />
+<jsp:include page="_header.jsp"/>
+<jsp:include page="_menu.jsp"/>
 
 
 <h1>Login</h1>
@@ -26,27 +31,50 @@
     </div>
 </c:if>
 
-<h3>Enter user name and password:</h3>
-
-<form name='f' action="${pageContext.request.contextPath}/j_spring_security_check" method='POST'>
+<h3>Login with Username and Password</h3>
+<c:url var="loginUrl" value="/j_spring_security_check"></c:url>
+<form action="${loginUrl}" method="POST">
     <table>
         <tr>
-            <td>User:</td>
-            <td><input type='text' name='username' value=''></td>
+            <td>User ID:</td>
+            <td><input type='text' name='username' /></td>
         </tr>
         <tr>
             <td>Password:</td>
             <td><input type='password' name='password' /></td>
         </tr>
         <tr>
-            <td><input name="submit" type="submit" value="Log in" />
-                | &nbsp;
-                <a href="${pageContext.request.contextPath}/register">Register</a>
-
-
-            </td>
+            <td colspan='2'><input name="submit" type="submit"
+                                   value="Login" /></td>
         </tr>
     </table>
 </form>
+
+<sec:authorize access="isAnonymous()">
+    <form name='loginForm' action="<c:url value='/j_spring_security_check'/>" method="post">
+        <table>
+            <tr>
+                <td>User:</td>
+                <td><input type='text' name='j_username'></td>
+            </tr>
+            <tr>
+                <td>Password:</td>
+                <td><input type='password' name='j_password'/></td>
+            </tr>
+            <tr>
+                <td><input name="submit" type="submit" value="Login"/>
+                    | &nbsp;
+                    <a href="${pageContext.request.contextPath}/register">Register</a>
+
+
+                </td>
+            </tr>
+        </table>
+    </form>
+</sec:authorize>
+
+
+<jsp:include page="_footer.jsp"/>
+
 </body>
 </html>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/security
+       http://www.springframework.org/schema/security/spring-security.xsd">
+
+    <security:http use-expressions="true">
+        <security:intercept-url pattern="/*" access="permitAll()"/>
+        <security:intercept-url pattern="/cart" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>
+
+        <security:intercept-url pattern="/addProduct" access="hasRole('ROLE_ADMIN')"/>
+        <security:intercept-url pattern="/editProduct" access="hasRole('ROLE_ADMIN')"/>
+        <security:intercept-url pattern="/editCategory" access="hasRole('ROLE_ADMIN')"/>
+        <security:intercept-url pattern="/addCategory" access="hasRole('ROLE_ADMIN')"/>
+        <security:intercept-url pattern="/userList" access="hasRole('ROLE_ADMIN')"/>
+        <security:access-denied-handler error-page="/errorPage"/>
+
+        <security:form-login login-page='/login'
+                             login-processing-url="/j_spring_security_check"
+                             default-target-url="/home"
+                             always-use-default-target="false"
+                             authentication-failure-url="/login?error=true"
+                             />
+
+        <security:logout logout-url="/logout" logout-success-url="/home"
+                         delete-cookies="JSESSIONID" invalidate-session="true"/>
+    </security:http>
+
+    <security:authentication-manager>
+        <security:authentication-provider>
+            <security:user-service>
+                <security:user name="user" password="user" authorities="ROLE_USER"/>
+                <security:user name="admin" password="admin" authorities="ROLE_USER, ROLE_ADMIN"/>
+            </security:user-service>
+        </security:authentication-provider>
+
+        <security:authentication-provider>
+            <security:jdbc-user-service data-source-ref="dataSource"
+                                        users-by-username-query="SELECT login, password FROM shop_users WHERE login=?"
+                                        authorities-by-username-query="SELECT login, concat('ROLE_',user_role) user_role FROM AUTHORITIES WHERE login=?"/>
+        </security:authentication-provider>
+    </security:authentication-manager>
+</beans>

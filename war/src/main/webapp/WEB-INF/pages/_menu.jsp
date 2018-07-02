@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 
 
@@ -28,6 +29,25 @@
             <li class="nav-item">
                 <a class="nav-link" href="${pageContext.request.contextPath}/AllProductList">Products</a>
             </li>
+
+            <sec:authorize access="hasRole('ROLE_ADMIN')">
+                <li class="nav-item">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/addCategory">Add category</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/addProduct">Add category</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/editCategory">Edit category</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/editProduct">Edit category</a>
+                </li>
+            </sec:authorize>
+
             <li class="nav-item">
                 <c:if test="${pageContext.request.userPrincipal.name != null}">
 

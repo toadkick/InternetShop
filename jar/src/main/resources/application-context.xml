@@ -25,17 +25,12 @@
     </bean>
 
     <jdbc:initialize-database>
-        <jdbc:script location="classpath:shopDB.sql"></jdbc:script>
+        <jdbc:script location="classpath:shopDB.sql"/>
         <jdbc:script location="classpath:insertDB.sql"/>
     </jdbc:initialize-database>
 
     <bean id = "jdbcTemplate" class = "org.springframework.jdbc.core.JdbcTemplate">
         <property name = "dataSource" ref = "dataSource"/>
     </bean>
-
-    <!-- this broke program , but without template null-->
-   <!-- <bean id = "dao" class = "com.eshop.products.dao.Impl.ProductDAOImpl">
-        <property name = "template" ref = "jdbcTemplate"/>
-    </bean> -->
 
 </beans>

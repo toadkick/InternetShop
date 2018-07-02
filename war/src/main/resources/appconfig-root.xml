@@ -3,12 +3,11 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns="http://www.springframework.org/schema/beans"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+    	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
     <import resource="classpath:appconfig-mvc.xml"/>
     <import resource="classpath:application-context.xml"/>
-
+    <import resource="classpath:appconfig-security.xml"/>
 
     <!-- Scans within the base package of the application for @Component classes to configure as beans -->
     <context:component-scan base-package="com.eshop.products.*"/>

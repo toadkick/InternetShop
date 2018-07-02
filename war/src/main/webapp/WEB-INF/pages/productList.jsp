@@ -8,7 +8,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib uri = "http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="spring" uri="http://java.sun.com/jstl/core" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
+
 <spring:url value="/product" var="showProduct"/>
+
 
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
@@ -21,31 +24,38 @@
 <jsp:include page="_header.jsp"/>
 <jsp:include page="_menu.jsp"/>
 
-<div class="card-deck-wrapper">
-    <div class="card-columns">
 
-        <c:forEach var="product" items="${list}">
+<div class="card-deck">
 
-            <div class="card" style="padding: 20px; background-color: #cccccc">
-                <img class="card-img-top" src="resources/image/book.gif" alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title">${product.name}</h5>
-                </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item"  style="background-color: darkgrey">AUTHOR - ${product.author}</li>
-                    <li class="list-group-item"  style="background-color: darkgrey">YEAR - ${product.date}</li>
-                    <li class="list-group-item"  style="background-color: darkgrey">PRICE - ${product.price}$</li>
-                </ul>
-                <div class="card-body">
-                    <a href="${showProduct}/${product.productID}" class="card-link">INFO</a>
-                    <a href="#" class="card-link">Add to cart</a>
+    <c:forEach var="product" items="${list}">
+        <div class="col-sm-2 col-sm-offset-1" style="max-width: 20rem; min-width: 15rem;  padding: 1rem">
+            <div class="wrapper">
+                <div class="card" style=" background-color: #cccccc">
+                    <img class="card-img-top" src="${pageContext.request.contextPath}/resources/image/book.gif"
+                         alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">${product.name}</h5>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item" style="background-color: darkgrey">AUTHOR - ${product.author}</li>
+                        <li class="list-group-item" style="background-color: darkgrey">YEAR - ${product.date}</li>
+                        <li class="list-group-item" style="background-color: darkgrey">PRICE - ${product.price}$</li>
+                    </ul>
+                    <div class="card-body">
+                        <a href="${showProduct}/${product.productID}" class="card-link">INFO</a>
+                        <sec:authorize access="isAuthenticated()">
+                        <a href="#" class="card-link">Add to cart</a>
+                        </sec:authorize>
+                    </div>
                 </div>
             </div>
+        </div>
 
-        </c:forEach>
+    </c:forEach>
 
-    </div>
 </div>
+
+
 
 <jsp:include page="_footer.jsp"/>
 </body>
