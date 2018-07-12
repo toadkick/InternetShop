@@ -4,6 +4,7 @@ import com.eshop.products.entities.Product;
 import com.eshop.products.services.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -20,9 +21,9 @@ public class CartController {
         List<Product> productList = cartService.showAllProductInCart(cartID);
         return new ModelAndView("cart", "list", productList);
     }
-
-    @RequestMapping("/deleteFromCart")
-    public ModelAndView deleteProductFromCart(int cartID,int productID) {
+    // ??????????????????
+    @RequestMapping("/deleteFromCart/{id}{cartID}")
+    public ModelAndView deleteProductFromCart(@PathVariable("cartID") int cartID,@PathVariable("id") int productID) {
         cartService.removeProductFromCart(productID,cartID);
         List<Product> productList = cartService.showAllProductInCart(cartID);
         return new ModelAndView("cart", "list", productList);
