@@ -6,9 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+
+//TODO its need to look
+
 
 @Controller
 public class CartController {
@@ -21,13 +25,19 @@ public class CartController {
         List<Product> productList = cartService.showAllProductInCart(cartID);
         return new ModelAndView("cart", "list", productList);
     }
-    // ??????????????????
-    @RequestMapping("/deleteFromCart/{id}{cartID}")
+
+    @RequestMapping("/deleteFromCart/{id}/{cartID}")
     public ModelAndView deleteProductFromCart(@PathVariable("cartID") int cartID,@PathVariable("id") int productID) {
         cartService.removeProductFromCart(productID,cartID);
         List<Product> productList = cartService.showAllProductInCart(cartID);
         return new ModelAndView("cart", "list", productList);
     }
 
-    //TODO adding products
+    @RequestMapping("/addToCart")
+    public ModelAndView addProductToCart(@RequestParam("cartID")int cartID,@RequestParam("id")int productID,
+                                         @RequestParam("count")int count) {
+        cartService.addProductInCart(productID,cartID,count);
+        List<Product> productList = cartService.showAllProductInCart(cartID);
+        return new ModelAndView("cart", "list", productList);
+    }
 }
