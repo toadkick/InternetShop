@@ -7,7 +7,7 @@
        http://www.springframework.org/schema/security
        http://www.springframework.org/schema/security/spring-security.xsd">
 
-    <security:http use-expressions="true">
+    <security:http use-expressions="true" auto-config="true">
         <security:intercept-url pattern="/*" access="permitAll()"/>
         <security:intercept-url pattern="/cart" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>
 
@@ -18,14 +18,14 @@
         <security:intercept-url pattern="/userList" access="hasRole('ROLE_ADMIN')"/>
         <security:access-denied-handler error-page="/errorPage"/>
 
-        <security:form-login login-page='/login'
-                             login-processing-url="/j_spring_security_check"
-                             default-target-url="/home"
+        <security:form-login login-page='/eshop/login'
+                             login-processing-url="/eshop/j_spring_security_check"
+                             default-target-url="/eshop/home"
                              always-use-default-target="false"
-                             authentication-failure-url="/login?error=true"
+                             authentication-failure-url="/eshop/login?error=true"
                              />
 
-        <security:logout logout-url="/logout" logout-success-url="/home"
+        <security:logout logout-url="/eshop/logout" logout-success-url="/home"
                          delete-cookies="JSESSIONID" invalidate-session="true"/>
     </security:http>
 
@@ -40,7 +40,7 @@
         <security:authentication-provider>
             <security:jdbc-user-service data-source-ref="dataSource"
                                         users-by-username-query="SELECT login, password FROM shop_users WHERE login=?"
-                                        authorities-by-username-query="SELECT login, concat('ROLE_',user_role) user_role FROM AUTHORITIES WHERE login=?"/>
+                                        authorities-by-username-query="SELECT login, concat('ROLE_',authority) authority FROM AUTHORITIES WHERE login=?"/>
         </security:authentication-provider>
     </security:authentication-manager>
 </beans>

@@ -17,4 +17,12 @@ insert into products values(7,2,'The Dark Tower II: The Drawing of the Three','S
 insert into products values(8,21,'Elric of Melnibone','M.Moorcock',null,450,2,1995);
 insert into products values(9,22,'The Time Machine','H.Wells',null,90,9,2010);
 insert into products values(10,22,'Stranger in a Strange Land','R.A.Heinlein',null,120,5,2015);
+
+insert into SHOP_USERS values('user', 'user', '02', 'user@mail.com');
+insert into SHOP_USERS values('admin', 'admin', '02', 'admin@mail.com');
+
+insert into AUTHORITIES values(1, 'admin', 'ADMIN');
+insert into AUTHORITIES values(2, 'admin', 'USER');
+insert into AUTHORITIES values(3, 'user', 'USER');
+
 COMMIT;

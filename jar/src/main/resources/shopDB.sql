@@ -28,7 +28,7 @@ DROP SEQUENCE cart_product_seq;
 
 -- creating tables
 create table shop_users (login varchar2(20) primary key,password varchar2(20),phone varchar2(9),e_mail varchar2(50));
-create table authorities (user_role varchar2(10) primary key,login varchar2(20),authority varchar2(15));
+create table authorities (user_role_id number primary key,login varchar2(20),authority varchar2(15));
 create table cart(cart_id number primary key,login varchar2(20));
 create table cart_products(cart_products_id number primary key,cart_id number,product_id number,quanitity number);
 create table products(product_id number primary key,category_id number,name varchar2(50),author varchar2(50),parent_id number, price number,quanitity number,year_date number);
