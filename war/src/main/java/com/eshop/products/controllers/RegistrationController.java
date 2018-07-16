@@ -25,8 +25,6 @@ public class RegistrationController {
         System.out.println("password: " + account.getPassword());
         System.out.println("email: " + account.getEmail());
         System.out.println("phone: " + account.getPhone());
-
         return "login";
-
     }
 }

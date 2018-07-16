@@ -15,14 +15,24 @@ public class UserController {
     @Autowired
     public UserService userService;
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+/*    @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView login() {
 
         ModelAndView model = new ModelAndView();
         model.setViewName("login");
 
         return model;
+    }*/
 
+        @RequestMapping(value = "/login", method = RequestMethod.GET)
+        public String login (Model model, String error, String logout){
+            if (error != null)
+                model.addAttribute("error", "Your username and password is invalid.");
+            if (logout != null)
+                model.addAttribute("message", "You have been logged out successfully.");
+            model.addAttribute("current", "/WEB-INF/views/login.jsp");
+            return "login";
+
+        }
     }
-}
 

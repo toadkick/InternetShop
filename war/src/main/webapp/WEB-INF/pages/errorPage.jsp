@@ -11,6 +11,6 @@
     <title>Title</title>
 </head>
 <body>
-
+<h1>ERROR! PAGE NOT FOUND! DON'T CRY!</h1>
 </body>
 </html>

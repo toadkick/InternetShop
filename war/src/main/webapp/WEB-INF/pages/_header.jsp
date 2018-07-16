@@ -7,6 +7,9 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="spring" uri="http://java.sun.com/jstl/core" %>
+<%@taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
+<spring:url var="logOutUrl" value="/j_spring_security_check"/>
 <div class="header-container" style="background-color: #343a40; text-align: right; color: #cccccc;">
 
     <div class="header-bar" style="margin-right: 3rem">
@@ -15,7 +18,7 @@
             <a href="${pageContext.request.contextPath}/accountInfo">
                     ${pageContext.request.userPrincipal.name} </a>
             &nbsp;|&nbsp;
-            <a href="${pageContext.request.contextPath}/j_spring_security_logout">Logout</a>
+            <a href="${logOutUrl}">Logout</a>
             &nbsp;|&nbsp;
             <a href="${pageContext.request.contextPath}/cart">Cart</a>
         </c:if>
