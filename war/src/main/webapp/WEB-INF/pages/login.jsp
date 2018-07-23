@@ -33,6 +33,33 @@
 
 <h3>Login with Username and Password</h3>
 
+<form name='loginForm'
+      action="<c:url value='/j_spring_security_check' />" method='POST'>
+
+    <table>
+        <tr>
+            <td>User:</td>
+            <td><input type='text' name='username'></td>
+        </tr>
+        <tr>
+            <td>Password:</td>
+            <td><input type='password' name='password' /></td>
+        </tr>
+        <tr>
+            <td colspan='2'><input name="submit" type="submit"
+                                   value="Login" /></td>
+
+        </tr>
+    </table>
+    | &nbsp;
+    <a href="${pageContext.request.contextPath}/register">Register</a>
+    <input type="hidden" name="${_csrf.parameterName}"
+           value="${_csrf.token}" />
+
+</form>
+</div>
+
+<%--
 <sec:authorize access="isAnonymous()">
     <form action="${loginURL}" method="post">
         <table>
@@ -46,13 +73,13 @@
             </tr>
             <tr>
                 <td><input name="submit" type="submit" value="Login"/>
-                    | &nbsp;
-                    <a href="${pageContext.request.contextPath}/register">Register</a>
+
                 </td>
             </tr>
         </table>
     </form>
 </sec:authorize>
+--%>
 
 
 <jsp:include page="_footer.jsp"/>

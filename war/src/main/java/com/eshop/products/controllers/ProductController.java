@@ -4,13 +4,14 @@ import com.eshop.products.entities.Category;
 import com.eshop.products.entities.Product;
 import com.eshop.products.services.ProductsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
-@RestController
+@Controller
 public class ProductController {
 
     @Autowired

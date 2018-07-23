@@ -24,15 +24,22 @@ public class UserController {
         return model;
     }*/
 
-        @RequestMapping(value = "/login", method = RequestMethod.GET)
-        public String login (Model model, String error, String logout){
-            if (error != null)
-                model.addAttribute("error", "Your username and password is invalid.");
-            if (logout != null)
-                model.addAttribute("message", "You have been logged out successfully.");
-            model.addAttribute("current", "/WEB-INF/views/login.jsp");
-            return "login";
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public ModelAndView login(@RequestParam(value = "error", required = false) String error,
+                              @RequestParam(value = "logout", required = false) String logout) {
 
+        ModelAndView model = new ModelAndView();
+        if (error != null) {
+            model.addObject("error", "Invalid username and password!");
         }
+
+        if (logout != null) {
+            model.addObject("msg", "You've been logged out successfully.");
+        }
+        model.setViewName("login");
+
+        return model;
+
+    }
     }
 
