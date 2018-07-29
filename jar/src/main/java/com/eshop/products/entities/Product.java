@@ -11,6 +11,7 @@ public class Product {
     private double price;
     private int count;
     private int date;
+    private String imgSource;
 
     public Product() {
     }
@@ -102,5 +103,13 @@ public class Product {
 
     public void setDate(int date) {
         this.date = date;
+    }
+
+    public String getImgSource() {
+        return imgSource;
+    }
+
+    public void setImgSource(String imgSource) {
+        this.imgSource = imgSource;
     }
 }

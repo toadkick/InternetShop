@@ -18,6 +18,7 @@ public class ProductRowMap implements RowMapper<Product> {
         product.setPrice(resultSet.getDouble(6));
         product.setCount(resultSet.getInt(7));
         product.setDate(resultSet.getInt(8));
+        product.setImgSource(resultSet.getString(9));
         return product;
     }
 }

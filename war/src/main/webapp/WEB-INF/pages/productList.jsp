@@ -31,7 +31,7 @@
         <div class="col-sm-2 col-sm-offset-1" style="max-width: 20rem; min-width: 15rem;  padding: 1rem">
             <div class="wrapper">
                 <div class="card" style=" background-color: #cccccc">
-                    <img class="card-img-top" src="${pageContext.request.contextPath}/resources/image/book.gif"
+                    <img class="card-img-top" src="${pageContext.request.contextPath}/resources/image/${product.imgSource}"
                          alt="Card image cap">
                     <div class="card-body">
                         <h5 class="card-title">${product.name}</h5>
