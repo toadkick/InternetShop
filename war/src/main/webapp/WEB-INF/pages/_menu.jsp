@@ -10,7 +10,27 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+<script>
+    var request = new XMLHttpRequest();
+    function searchInfo() {
+        var name  = document.searchVal.value;
+        var url = "pages/searchAJAXresult.jsp?val=" + name;
 
+        try {
+            request.onreadystatechange = function () {
+                if(request.readyState == 4) {
+                    var respText = request.responseText;
+                    document.getElementById('searchResults').innerHTML = respText;
+                }
+            }
+            request.open("GET",url,true);
+            request.send();
+        }catch (e){
+            alert("Unable to connect to server");
+        }
+
+    }
+</script>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="${pageContext.request.contextPath}/home">E-Shop</a>
@@ -57,10 +77,11 @@
                 </c:if>
             </li>>
         </ul>
-        <form:form class="form-inline my-2 my-lg-0" action="${pageContext.request.contextPath}/search" method="get">
+        <form:form name="searchForm" class="form-inline my-2 my-lg-0" action="${pageContext.request.contextPath}/search" method="get">
             <input name="searchVal" class="form-control mr-sm-2" placeholder="Search" type="text"/>
             <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
         </form:form>
+        <span id="searchResults"></span>
 
 
 <%--        <form class="form-inline my-2 my-lg-0" method="post" action="${pageContext.request.contextPath}/search" >
