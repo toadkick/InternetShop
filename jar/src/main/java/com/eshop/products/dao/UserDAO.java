@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface UserDAO {
 
-    public List<Account> findByLogin(String login);
+    public Account findByLogin(String login);
 }

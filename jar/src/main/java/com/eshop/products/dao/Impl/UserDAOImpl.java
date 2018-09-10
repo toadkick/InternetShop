@@ -17,8 +17,8 @@ public class UserDAOImpl implements UserDAO {
         this.template = template;
     }
     @Override
-    public List<Account> findByLogin(String username) {
-        return template.query("select * from SHOP_USERS", new UserRowMap());
+    public Account findByLogin(String username) {
+        return template.query("select * from SHOP_USERS WHERE LOGIN = " + "'" + username + "'", new UserRowMap()).get(0);
     }
 
     class UserRowMap implements RowMapper<Account> {
@@ -30,11 +30,6 @@ public class UserDAOImpl implements UserDAO {
             accounts.setPassword(resultSet.getString(2));
             accounts.setPhone(resultSet.getString(3));
             accounts.setEmail(resultSet.getString(4));
-            if(!"admin".equals(accounts.getLogin())){
-                accounts.setRole(Account.ROLE_USER);
-            } else {
-                accounts.setRole(Account.ROLE_ADMIN);
-            }
             return accounts;
         }
     }
