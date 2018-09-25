@@ -24,16 +24,10 @@
         <property name="password" value="${ds.password}"/>
     </bean>
 
-    <jdbc:initialize-database>
-        <jdbc:script location="classpath:packages/pkg_dropper.sql"/>
-        <jdbc:script location="classpath:package_body/pkg_body_dropper.sql"/>
-        <jdbc:script location="classpath:scripts/dropDB.sql"/>
-        <jdbc:script location="classpath:scripts/createDB.sql"/>
-        <jdbc:script location="classpath:scripts/insertDB.sql"/>
-    </jdbc:initialize-database>
-
     <bean id = "jdbcTemplate" class = "org.springframework.jdbc.core.JdbcTemplate">
         <property name = "dataSource" ref = "dataSource"/>
     </bean>
-
+    <jdbc:initialize-database data-source="dataSource">
+        <jdbc:script location="classpath:script.sql" encoding="UTF-8"/>
+    </jdbc:initialize-database>
 </beans>

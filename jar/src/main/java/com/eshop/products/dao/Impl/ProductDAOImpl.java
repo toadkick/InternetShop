@@ -17,7 +17,6 @@ import java.util.List;
 
 @Repository
 public class ProductDAOImpl implements ProductDAO {
-
     private JdbcTemplate template;
 
     @Autowired
