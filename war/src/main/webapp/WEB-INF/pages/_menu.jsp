@@ -68,14 +68,6 @@
                 </li>
             </sec:authorize>
 
-            <li class="nav-item">
-                <c:if test="${pageContext.request.userPrincipal.name != null}">
-
-                    | &nbsp;
-                    <a href="${pageContext.request.contextPath}/logout">Logout</a>
-
-                </c:if>
-            </li>>
         </ul>
         <form:form name="searchForm" class="form-inline my-2 my-lg-0" action="${pageContext.request.contextPath}/search" method="get">
             <input name="searchVal" class="form-control mr-sm-2" placeholder="Search" type="text"/>

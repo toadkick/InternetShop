@@ -8,6 +8,7 @@ public class Account {
     private String email;
     private String password;
     private String role;
+    private int enabled;
 
     public static final String ROLE_ADMIN = "ADMIN";
     public static final String ROLE_USER = "USER";
@@ -61,5 +62,13 @@ public class Account {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public int getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(int enabled) {
+        this.enabled = enabled;
     }
 }
