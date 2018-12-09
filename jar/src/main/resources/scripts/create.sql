@@ -1,7 +1,7 @@
 DELIMETER ##
 create sequence NEXT_SEQ start with 1000 increment by 1##
-create table shop_users (login varchar2(20) primary key,password varchar2(20),phone varchar2(9),e_mail varchar2(50))##
-create table authorities (user_role_id number primary key,login varchar2(20),authority varchar2(15))##
+create table shop_users (login varchar2(20) primary key,password varchar2(20) not null,phone varchar2(9),e_mail varchar2(50), enabled NUMBER(1) not null)##
+create table authorities (login varchar2(20),authority varchar2(15))##
 create table cart(cart_id number primary key,login varchar2(20))##
 create table cart_products(cart_products_id number primary key,cart_id number,product_id number,quanitity number)##
 create table products(product_id number primary key,category_id number,name varchar2(50),author varchar2(50),parent_id number, price number,quanitity number,year_date number, imgSource VARCHAR2(50))##
@@ -32,13 +32,16 @@ insert into products values(7,2,'The Dark Tower II: The Drawing of the Three','S
 insert into products values(8,21,'Elric of Melnibone','M.Moorcock',null,450,2,1995,'8.jpg')##
 insert into products values(9,22,'The Time Machine','H.Wells',null,90,9,2010,'9.jpg')##
 insert into products values(10,22,'Stranger in a Strange Land','R.A.Heinlein',null,120,5,2015,'10.jpg')##
-insert into SHOP_USERS values('user', 'user','02', 'user@mail.com')##
-insert into SHOP_USERS values('admin', 'admin', '02', 'admin@mail.com')##
-insert into AUTHORITIES values(1, 'admin', 'ADMIN')##
-insert into AUTHORITIES values(2, 'admin', 'USER')##
-insert into AUTHORITIES values(3, 'user', 'USER')##
+insert into SHOP_USERS values('user', 'user','02', 'user@mail.com', 1)##
+insert into SHOP_USERS values('admin', 'admin', '02', 'admin@mail.com', 1)##
+insert into AUTHORITIES values('admin', 'ADMIN')##
+insert into AUTHORITIES values('admin', 'USER')##
+insert into AUTHORITIES values('user', 'USER')##
 COMMIT##
 DELIMETER;
+
+
+
 
 
 
