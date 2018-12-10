@@ -1,7 +1,5 @@
 package com.eshop.products.entities;
 
-import java.util.Date;
-
 public class Product {
     private int productID;
     private int categoryID;

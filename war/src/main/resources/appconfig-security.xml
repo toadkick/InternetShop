@@ -12,13 +12,6 @@
 
     <import resource="classpath:application-context.xml"/>
 
-<!--
-    <mvc:annotation-driven validator="userFormValidator"/>
--->
-<!--
-    <security:global-method-security pre-post-annotations="enabled"/>
--->
-
     <security:http use-expressions="true" auto-config="true">
 
         <security:access-denied-handler error-page="/errorPage" />
@@ -42,21 +35,15 @@
 
         <security:logout logout-url="/logout" logout-success-url="/home"
                          delete-cookies="JSESSIONID" invalidate-session="true"/>
-<!--
-        <security:csrf/>
--->
+
     </security:http>
 
     <security:authentication-manager>
         <security:authentication-provider>
             <security:user-service>
                 <security:user name="user" password="user" authorities="ROLE_USER"/>
-                <!--<security:user name="admin" password="admin" authorities="ROLE_USER, ROLE_ADMIN"/>-->
             </security:user-service>
-<!--
-            <security:password-encoder ref="encoder" />
--->
-        </security:authentication-provider>
+   </security:authentication-provider>
 
         <security:authentication-provider>
             <security:jdbc-user-service id="jdbcUserService"  data-source-ref="dataSource"

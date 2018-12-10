@@ -2,20 +2,19 @@ DELIMETER ##
 create sequence NEXT_SEQ start with 1000 increment by 1##
 create table shop_users (login varchar2(20) primary key,password varchar2(20) not null,phone varchar2(9),e_mail varchar2(50), enabled NUMBER(1) not null)##
 create table authorities (login varchar2(20),authority varchar2(15))##
-create table cart(cart_id number primary key,login varchar2(20))##
-create table cart_products(cart_products_id number primary key,cart_id number,product_id number,quanitity number)##
+create table cart(login varchar2(20),product_id number,quantity number)##
 create table products(product_id number primary key,category_id number,name varchar2(50),author varchar2(50),parent_id number, price number,quanitity number,year_date number, imgSource VARCHAR2(50))##
 create table category (category_id number primary key,category_name varchar2(20),parent_category_id number)##
 create table product_attribute_value(product_attribute_value_id number primary key,product_id number,attribute_id number,this_value varchar2(10))##
 CREATE table attribute(attribute_id number primary key,attribute_name varchar2(20))##
 alter table authorities add  foreign key (login) references shop_users (login)##
 alter table cart add  foreign key (login) references shop_users (login)##
-alter table cart_products add  foreign key (cart_id) references cart (cart_id)##
-alter table cart_products add  foreign key (product_id) references products (product_id)##
+alter table cart add  foreign key (product_id) references products (product_id)##
 alter table products add  foreign key (category_id) references category (category_id)##
 alter table product_attribute_value add  foreign key (product_id) references products (product_id)##
 alter table product_attribute_value add  foreign key (attribute_id) references attribute (attribute_id)##
 alter table category add UNIQUE (category_id,parent_category_id)##
+alter table cart add UNIQUE (login, product_id)##
 insert into category values (1,'classic',null)##
 insert into category values (11, 'romanticism',1)##
 insert into category values (12, 'modernism',1)##

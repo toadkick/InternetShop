@@ -11,6 +11,24 @@
     <title>Title</title>
 </head>
 <body>
+<jsp:include page="_header.jsp"/>
+<jsp:include page="_menu.jsp"/>
+<h1>all categories</h1>
+<table border = "2" >
+    <tr>
+        <th>Product</th>
+        <th>Price</th>
+        <th>Quantity</th>
+    </tr>
+    <c:forEach var = "list" items = "${list}">
+        <tr>
+            <td>${list.productName}</td>
+            <td>${list.price}</td>
+            <td>${list.count}</td>
+        </tr>
+    </c:forEach>
+</table>
+<jsp:include page="_footer.jsp"/>
 
 </body>
 </html>

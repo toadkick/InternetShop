@@ -11,6 +11,8 @@
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
 
 <spring:url value="/product" var="showProduct"/>
+<spring:url value="/addToCart" var="addProductToCart"/>
+
 
 
 <!-- Bootstrap CSS -->
@@ -44,7 +46,7 @@
                     <div class="card-body">
                         <a href="${showProduct}/${product.productID}" class="card-link">INFO</a>
                         <sec:authorize access="isAuthenticated()">
-                        <a href="#" class="card-link">Add to cart</a>
+                        <a href="${addProductToCart}/${product.productID}" class="card-link">Add to cart</a>
                         </sec:authorize>
                     </div>
                 </div>
