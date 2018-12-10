@@ -1,7 +1,6 @@
 DELIMETER ##
 DROP TABLE product_attribute_value##
 DROP TABLE attribute##
-DROP TABLE cart_products##
 DROP TABLE authorities##
 DROP TABLE cart##
 DROP TABLE shop_users##

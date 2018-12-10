@@ -7,7 +7,6 @@ import com.eshop.products.entities.ProductRowMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
@@ -22,6 +21,11 @@ public class ProductDAOImpl implements ProductDAO {
     @Autowired
     public void setTemplate(JdbcTemplate template) {
         this.template = template;
+    }
+
+    @Override
+    public List<Product> getTopProducts() {
+        return template.query("select * from products where rownum < 4", new ProductRowMap());
     }
 
     @Override

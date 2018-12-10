@@ -1,8 +1,8 @@
 package com.eshop.products.entities;
 
+
 public class Account {
 
-    private int userID;
     private String login;
     private String phone;
     private String email;
@@ -16,12 +16,17 @@ public class Account {
     public Account() {
     }
 
-    public int getUserID() {
-        return userID;
+    public Account(String login, String phone, String email, String password) {
+        this.login = login;
+        this.phone = phone;
+        this.email = email;
+        this.password = password;
     }
 
-    public void setUserID(int userID) {
-        this.userID = userID;
+    public Account(String login, String phone, String email) {
+        this.login = login;
+        this.phone = phone;
+        this.email = email;
     }
 
     public String getLogin() {

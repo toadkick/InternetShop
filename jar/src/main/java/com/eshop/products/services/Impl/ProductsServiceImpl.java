@@ -19,6 +19,9 @@ public class ProductsServiceImpl implements ProductsService {
     public List<Product> showAllProducts() {
         return productDAO.getAllProducts();
     }
+    public List<Product> showTopProducts() {
+        return productDAO.getTopProducts();
+    }
     public List<Category> showAllCategories() {return productDAO.getAllCategories();}
     public List<Product> getProductsByCategory(int catID) {return productDAO.getProductsByCategory(catID);}
     public Product getProductByID(int id) {return productDAO.getProductByID(id);}

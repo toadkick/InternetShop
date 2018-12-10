@@ -11,6 +11,24 @@
     <title>Title</title>
 </head>
 <body>
+<jsp:include page="_header.jsp"/>
+<jsp:include page="_menu.jsp"/>
+<h1>User Info:</h1>
+<table border = "2" >
+<tr>
+    <th>Login</th>
+    <th>Email</th>
+    <th>Phone</th>
+</tr>
+<c: var = "user" item = "${user}">
+    <tr>
+        <td>${user.login}</td>
+        <td>${user.email}</td>
+        <td>${user.phone}</td>
+    </tr>
+</c:>
+</table>
+<jsp:include page="_footer.jsp"/>
 
 </body>
 </html>

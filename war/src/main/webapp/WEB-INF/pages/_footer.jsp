@@ -9,7 +9,7 @@
 <br><br><br>
 <div class="footer-container" style="text-align: center; background-color: #343a40; color: #cccccc;">
     <br>
-    @Copy right GROUP 3</a>
+    @Copyright CDP1988</a>
     <br><br>
 
 </div>

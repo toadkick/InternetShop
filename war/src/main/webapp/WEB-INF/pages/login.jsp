@@ -18,9 +18,6 @@
 <jsp:include page="_header.jsp"/>
 <jsp:include page="_menu.jsp"/>
 
-
-<h1>Login</h1>
-
 <!-- /login?error=true -->
 <c:if test="${param.error == 'true'}">
     <div style="color:red;margin:10px 0px;">
@@ -31,12 +28,12 @@
     </div>
 </c:if>
 
-<h3>Login with Username and Password</h3>
+<h3 align="center">Login with Username and Password</h3>
 
 <form name='loginForm'
       action="<c:url value='/j_spring_security_check' />" method='POST'>
 
-    <table>
+    <table align="center">
         <tr>
             <td>User:</td>
             <td><input type='text' name='username'></td>
@@ -48,39 +45,16 @@
         <tr>
             <td colspan='2'><input name="submit" type="submit"
                                    value="Login" /></td>
-
         </tr>
     </table>
-    | &nbsp;
-    <a href="${pageContext.request.contextPath}/register">Register</a>
+    <div align="center">
+        <a href="${pageContext.request.contextPath}/register"> Or click here if you are not registered yet</a>
+    </div>
     <input type="hidden" name="${_csrf.parameterName}"
            value="${_csrf.token}" />
 
 </form>
 </div>
-
-<%--
-<sec:authorize access="isAnonymous()">
-    <form action="${loginURL}" method="post">
-        <table>
-            <tr>
-                <td>User:</td>
-                <td><input type='text' name='j_username'></td>
-            </tr>
-            <tr>
-                <td>Password:</td>
-                <td><input type='password' name='j_password'/></td>
-            </tr>
-            <tr>
-                <td><input name="submit" type="submit" value="Login"/>
-
-                </td>
-            </tr>
-        </table>
-    </form>
-</sec:authorize>
---%>
-
 
 <jsp:include page="_footer.jsp"/>
 

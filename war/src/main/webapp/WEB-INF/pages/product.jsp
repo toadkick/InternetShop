@@ -6,6 +6,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="spring" uri="http://java.sun.com/jstl/core" %>
+<spring:url value="/addToCart" var="addProductToCart"/>
+
 <html>
 <head>
     <title>Product</title>
@@ -34,7 +37,7 @@
             <td>${product.author}</td>
             <td>${product.price}</td>
             <td>${product.date}</td>
-            <td><button href="#">Buy</button></td>
+            <td><button href="${addProductToCart}/${product.productID}">Buy</button></td>
 
 
         </tr>
