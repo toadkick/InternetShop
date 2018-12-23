@@ -15,6 +15,12 @@ import java.util.List;
 @Repository
 
 public class UserDAOImpl implements UserDAO {
+    private static final String GET_USER_BY_LOGIN =  "select LOGIN, PHONE, E_MAIL from SHOP_USERS WHERE LOGIN = ?";
+    private static final String INSERT_USER_TO_SHOP_USER =
+            "INSERT INTO SHOP_USERS (login, PASSWORD, PHONE, E_MAIL, ENABLED) VALUES (?,?,?,?,1)";
+    private static final String INSERT_USER_TO_AUTHORITIES =
+            "INSERT INTO AUTHORITIES (LOGIN, AUTHORITY) VALUES (?,'USER')";
+
     private JdbcTemplate template;
     @Autowired
     public void setTemplate(JdbcTemplate template) {
@@ -23,15 +29,15 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public void insertUser(String login, String password, String email, String phone) {
-        template.update("INSERT INTO SHOP_USERS (login, PASSWORD, PHONE, E_MAIL, ENABLED) VALUES (?,?,?,?,1)", login, password, phone, email);
-        template.update("INSERT INTO AUTHORITIES (LOGIN, AUTHORITY) VALUES (?,'USER')", login);
+        template.update(INSERT_USER_TO_SHOP_USER, login, password, phone, email);
+        template.update(INSERT_USER_TO_AUTHORITIES, login);
     }
 
     @Override
     public Account findByLogin(String username) {
         Account account = null;
         try {
-            account = (Account) template.queryForObject("select * from SHOP_USERS WHERE LOGIN = " + "'" + username + "'", new UserRowMap());
+            account = (Account) template.queryForObject(GET_USER_BY_LOGIN, new Object[] {username}, new UserRowMap());
         } catch (EmptyResultDataAccessException e) {}
         return account;
     }
@@ -40,17 +46,13 @@ public class UserDAOImpl implements UserDAO {
 
         @Override
         public Object mapRow(ResultSet resultSet, int i) throws SQLException {
-            if (resultSet.next()) {
-                Account account = new Account();
+            Account account = new Account();
+            if (resultSet != null) {
                 account.setLogin(resultSet.getString(1));
-                account.setPassword(resultSet.getString(2));
-                account.setPhone(resultSet.getString(3));
-                account.setEmail(resultSet.getString(4));
-                account.setEnabled(resultSet.getInt(5));
-                return account;
+                account.setPhone(resultSet.getString(2));
+                account.setEmail(resultSet.getString(3));
             }
-                return null;
-
+                return account;
         }
     }
 }

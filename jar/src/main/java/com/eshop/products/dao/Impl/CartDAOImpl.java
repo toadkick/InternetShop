@@ -16,6 +16,21 @@ import java.util.List;
 @Repository
 public class CartDAOImpl implements CartDAO {
     private JdbcTemplate template;
+    private static final String UPDATE_PROD_IN_CART =
+            "MERGE INTO CART t using (SELECT ? as LOGIN, ? as PRODUCT_ID from dual) v " +
+            "ON (t.LOGIN = v.LOGIN and t.PRODUCT_ID = v.PRODUCT_ID)" +
+            "WHEN NOT MATCHED THEN INSERT (LOGIN, PRODUCT_ID, quantity) VALUES (v.LOGIN,  v.PRODUCT_ID, 1) " +
+            "WHEN MATCHED THEN UPDATE SET quantity=quantity + 1";
+    private static final String UPDATE_PROD_COUNT_IN_PRODUCTS =
+            "update PRODUCTS SET quantity = quantity - ? WHERE PRODUCT_ID = ?";
+    private static final String UPDATE_CART_COUNT_IN_PRODUCTS =
+            "update CART SET quantity = quantity + ? WHERE PRODUCT_ID = ? and login = ?";
+    private static final String UPDATE_PROD_COUNT_IN_PRODUCTS_2 =
+            "update PRODUCTS SET quantity = quantity + (SELECT quantity FROM CART WHERE LOGIN = ? and product_id = ?)";
+    private static final String DELETE_PROD_FROM_CART = "delete from CART where login = ? and PRODUCT_ID= ?";
+    private static final String GET_CART = "select c.login login, c.product_id product_id, p.name name, p.price price," +
+            "c.quantity quantity from PRODUCTS p, CART c WHERE c.PRODUCT_ID = p.PRODUCT_ID and c.login= ?";
+    private static final String BUY = "delete from CART where login = ?";
 
     @Autowired
     public void setTemplate(JdbcTemplate template) {
@@ -26,25 +41,36 @@ public class CartDAOImpl implements CartDAO {
     public List<Cart> getProductsInCart(String login) {
         List<Cart> carts = null;
         try {
-            carts =  template.query("select c.login login, c.product_id product_id, p.name name, p.price price, c.quantity quantity" +
-                    " from PRODUCTS p, CART c " +
-                    "WHERE c.PRODUCT_ID = p.PRODUCT_ID and c.login= "+login, new CartMapper());
+            carts =  template.query(GET_CART, new Object[] {login}, new CartMapper());
         } catch (EmptyResultDataAccessException e) {}
         return carts;
     }
 
     @Override
     public void addProductInCart(int productID, String login) {
-        template.update("update PRODUCTS SET quantity = quantity - 1");
-        template.update("merge CART t using (SELECT "+login+" as LOGIN, "+productID+" as PRODUCT_ID) v ON " +
-                "(t.LOGIN = v.LOGIN and t.PRODUCT_ID = v.PRODUCT_ID) WHEN NOT MATCHED THEN INSERT (LOGIN, PRODUCT_ID, quantity) VALUES (" + login +
-                "," + productID + ", 1) WHEN MATCHED THEN UPDATE SET quantity=quantity+1");
+        template.update(UPDATE_PROD_COUNT_IN_PRODUCTS, 1, productID);
+        template.update(UPDATE_PROD_IN_CART, login, productID);
     }
 
     @Override
     public void removeProductFromCart(int productID, String login) {
-        template.update("update PRODUCTS SET quantity = quantity + (SELECT quantity FROM CART WHERE LOGIN = "+login+" and product_id = "+ productID+")");
-        template.update("delete from CART where Login=" + login + " and PRODUCT_ID=" + productID);
+        template.update(UPDATE_PROD_COUNT_IN_PRODUCTS_2, login, productID);
+        template.update(DELETE_PROD_FROM_CART, login, productID);
+    }
+
+    @Override
+    public void updateCart(String login, int id, int value) {
+        template.update(UPDATE_CART_COUNT_IN_PRODUCTS, value, id, login);
+    }
+
+    @Override
+    public void updateProd(int id, int value) {
+        template.update(UPDATE_PROD_COUNT_IN_PRODUCTS, value, id);
+    }
+
+    @Override
+    public void buy(String login) {
+        template.update(BUY, login);
     }
 
     private static final class CartMapper implements RowMapper<Cart> {

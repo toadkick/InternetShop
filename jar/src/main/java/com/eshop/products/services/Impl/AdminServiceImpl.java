@@ -12,8 +12,8 @@ public class AdminServiceImpl implements AdminService {
     private AdminDAO adminDAO;
 
     @Override
-    public void addProduct(int id, int catID, String name, String author, int parID, double price, int count, int date) {
-        adminDAO.addProduct(id, catID, name, author, parID, price, count, date);
+    public void addProduct(int catID, String name, String author, int parID, double price, int count, int date) {
+        adminDAO.addProduct(catID, name, author, parID, price, count, date);
     }
 
     @Override
@@ -22,8 +22,8 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public void addCategory(int id, String name, int parID) {
-        adminDAO.addCategory(id, name, parID);
+    public void addCategory(String name, int parID) {
+        adminDAO.addCategory(name, parID);
     }
 
     @Override
