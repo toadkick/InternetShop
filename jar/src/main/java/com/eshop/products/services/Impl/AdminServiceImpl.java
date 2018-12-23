@@ -28,6 +28,6 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public void deleteCategory(int id) {
-        adminDAO.deleteProduct(id);
+        adminDAO.deleteCategory(id);
     }
 }

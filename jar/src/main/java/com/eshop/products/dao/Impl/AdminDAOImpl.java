@@ -31,7 +31,8 @@ public class AdminDAOImpl implements AdminDAO {
 
     @Override
     public void addCategory(String name, int parentID) {
-        template.update(ADD_CATEGORY, name, parentID);
+
+        template.update(ADD_CATEGORY, name, parentID == 0 ? null : parentID);
     }
 
     @Override

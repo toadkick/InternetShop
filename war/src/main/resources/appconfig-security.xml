@@ -23,6 +23,7 @@
         <security:intercept-url pattern="/editProduct" access="hasRole('ROLE_ADMIN')"/>
         <security:intercept-url pattern="/editCategory" access="hasRole('ROLE_ADMIN')"/>
         <security:intercept-url pattern="/addCategory" access="hasRole('ROLE_ADMIN')"/>
+        <security:intercept-url pattern="/categoryManager" access="hasRole('ROLE_ADMIN')"/>
         <security:intercept-url pattern="/userList" access="hasRole('ROLE_ADMIN')"/>
         <security:access-denied-handler error-page="/errorPage"/>
         <security:intercept-url pattern="/login*" access="isAnonymous()" />

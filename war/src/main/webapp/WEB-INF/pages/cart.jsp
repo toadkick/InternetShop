@@ -9,6 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="spring" uri="http://java.sun.com/jstl/core" %>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
 <spring:url value="/decrease" var="decrease"/>
 <spring:url value="/increase" var="increase"/>
 <spring:url value="/removeFromCart" var="removeFromCart"/>
@@ -22,8 +23,8 @@
 <body>
 <jsp:include page="_header.jsp"/>
 <jsp:include page="_menu.jsp"/>
-<h1>CART</h1>
-<div>
+<div class="standart">
+    <h1>CART</h1>
     <table border = "2" id="cartItems" class="cart">
         <tr>
             <th>Product</th>
@@ -49,17 +50,19 @@
     </c:forEach>
     </table>
 </div>
-<div>
+<div class="standart">
     <a>TOTAL: </a>
     <a id='total'></a>
     <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/totalCalc.js">sum();</script>
 </div>
+<div class="standart">
 <form method="get" action="${buy}">
 <button type="submit" onclick="thanks()" >BUY!</button>
 </form>
 <script>function thanks() {
    alert("Thanks for oder");
 }</script>
+</div>
 <jsp:include page="_footer.jsp"/>
 
 </body>

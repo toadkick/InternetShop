@@ -14,7 +14,7 @@
 <jsp:include page="_header.jsp"/>
 <jsp:include page="_menu.jsp"/>
 
-Register ok. Go shopping!
+Register ok. Go logging!
 
 <jsp:include page="_footer.jsp"/>
 </body>
