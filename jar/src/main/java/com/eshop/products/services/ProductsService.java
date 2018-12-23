@@ -11,4 +11,5 @@ public interface ProductsService {
     List<Product> getProductsByCategory(int catID);
     Product getProductByID(int id);
     List<Product> getProductsByName(String productName);
+    boolean checkAvailable(int id);
 }

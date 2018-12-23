@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="spring" uri="http://java.sun.com/jstl/core" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
 <spring:url value="/addToCart" var="addProductToCart"/>
 
 <html>
@@ -17,15 +18,18 @@
 <jsp:include page="_header.jsp"/>
 <jsp:include page="_menu.jsp"/>
 
-<table border = "2" >
-    <tr>
+<img src="${pageContext.request.contextPath}/resources/image/${product.imgSource}">
+<sec:authorize access="isAuthenticated()">
+    <a href="${addProductToCart}/${product.productID}">Add to cart</a>
+</sec:authorize>
+<table border="2">
+<tr>
         <th>ID</th>
         <th>Cat_ID</th>
         <th>Name</th>
         <th>Author</th>
         <th>Price</th>
         <th>Date</th>
-        <th>Buy</th>
 
 
     </tr>
@@ -37,9 +41,6 @@
             <td>${product.author}</td>
             <td>${product.price}</td>
             <td>${product.date}</td>
-            <td><button href="${addProductToCart}/${product.productID}">Buy</button></td>
-
-
         </tr>
     </c:>
 </table>

@@ -9,16 +9,15 @@
 <%@taglib uri = "http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="spring" uri="http://java.sun.com/jstl/core" %>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+
 <html>
 <head>
-    <title>E-shop</title>
+    <title>Product list</title>
 </head>
 <body>
- <jsp:include page="_header.jsp"/>
- <jsp:include page="_menu.jsp"/>
- <h1>These books for you!</h1>
- <jsp:include page="productList.jsp"/>
- <jsp:include page="_footer.jsp"/>
+<jsp:include page="_header.jsp"/>
+<jsp:include page="_menu.jsp"/>
+<jsp:include page="productList.jsp"/>
+<jsp:include page="_footer.jsp"/>
 </body>
 </html>

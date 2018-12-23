@@ -12,4 +12,5 @@ public interface ProductDAO {
     List<Product> getProductsByName(String productName);
     List<Product> getProductsByCategory(int catID);
     Product getProductByID(int id);
+    boolean checkAvailable(int id);
 }

@@ -26,4 +26,9 @@ public class ProductsServiceImpl implements ProductsService {
     public List<Product> getProductsByCategory(int catID) {return productDAO.getProductsByCategory(catID);}
     public Product getProductByID(int id) {return productDAO.getProductByID(id);}
     public List<Product> getProductsByName(String productName) {return productDAO.getProductsByName(productName);}
+
+    @Override
+    public boolean checkAvailable(int id) {
+        return productDAO.checkAvailable(id);
+    }
 }

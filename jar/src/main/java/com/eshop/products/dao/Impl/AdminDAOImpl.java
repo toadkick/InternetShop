@@ -8,33 +8,34 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class AdminDAOImpl implements AdminDAO {
 
-    private JdbcTemplate template;
+    private static final String ADD_PRODUCT = "insert into PRODUCTS VALUES (NEXT_SEQ.nextval,?,?,?,?,?,?,?,'2.jpg')";
+    private static final String DELETE_PRODUCT = "DELETE FROM PRODUCTS WHERE PRODUCT_ID = ?";
+    private static final String DELETE_CATEGORY = "DELETE FROM CATEGORY where CATEGORY_ID = ?";
+    private static final String ADD_CATEGORY = "INSERT INTO CATEGORY VALUES(NEXT_SEQ.nextval,?,?)";
 
+    private JdbcTemplate template;
     @Autowired
     public void setTemplate(JdbcTemplate template) {
         this.template = template;
     }
 
-
     @Override
-    public void addProduct(int id, int catID, String name, String author, int parID, double price, int count, int date) {
-        template.update("insert into PRODUCTS VALUES (" + id + "," + catID + "," + name + "," + author + "," +
-                parID +"," + price + "," + count + "," + date + ")"
-        );
+    public void addProduct(int catID, String name, String author, int parentID, double price, int count, int date) {
+        template.update(ADD_PRODUCT, catID, name, author, parentID, price, count, date);
     }
 
     @Override
     public void deleteProduct(int id) {
-        template.update("DELETE FROM PRODUCTS WHERE PRODUCT_ID = " + id);
+        template.update(DELETE_PRODUCT, id);
     }
 
     @Override
-    public void addCategory(int id, String name, int parID) {
-        template.update("INSERT INTO CATEGORY VALUES (" + id + "," + name + "," + parID + ")");
+    public void addCategory(String name, int parentID) {
+        template.update(ADD_CATEGORY, name, parentID);
     }
 
     @Override
     public void deleteCategory(int id) {
-        template.update("DELETE from CATEGORY where CATEGORY_ID = " + id);
+        template.update(DELETE_CATEGORY, id);
     }
 }

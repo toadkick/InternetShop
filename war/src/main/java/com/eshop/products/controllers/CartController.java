@@ -41,10 +41,41 @@ public class CartController {
     }
 
     @RequestMapping(value = "/addToCart/{id}", method = RequestMethod.GET)
-    public String addProductToCart(HttpServletRequest request, @RequestParam("id")int id) {
+    public String addProductToCart(HttpServletRequest request, @PathVariable("id") int id) {
         String login = SecurityContextHolder.getContext().getAuthentication().getName();
         cartService.addProductInCart(id, login);
         String referer = request.getHeader("Referer");
         return "redirect:"+ referer;
         }
+
+    @RequestMapping(value = "/increase/{id}", method = RequestMethod.GET)
+    public String increase(HttpServletRequest request, @PathVariable("id") int id) {
+        String login = SecurityContextHolder.getContext().getAuthentication().getName();
+        cartService.updateCart(login, id, 1);
+        String referer = request.getHeader("Referer");
+        return "redirect:"+ referer;
+    }
+
+    @RequestMapping(value = "/decrease/{id}", method = RequestMethod.GET)
+    public String decrease(HttpServletRequest request, @PathVariable("id") int id) {
+        String login = SecurityContextHolder.getContext().getAuthentication().getName();
+        cartService.updateCart(login, id, -1);
+        String referer = request.getHeader("Referer");
+        return "redirect:"+ referer;
+    }
+
+    @RequestMapping(value = "/removeFromCart/{id}", method = RequestMethod.GET)
+    public String removeFromCart (HttpServletRequest request, @PathVariable("id") int id) {
+        String login = SecurityContextHolder.getContext().getAuthentication().getName();
+        cartService.removeProductFromCart(id, login);
+        String referer = request.getHeader("Referer");
+        return "redirect:"+ referer;
+    }
+    @RequestMapping(value = "/buy", method = RequestMethod.GET)
+    public String buy(HttpServletRequest request) {
+        String login = SecurityContextHolder.getContext().getAuthentication().getName();
+        cartService.buy(login);
+        String referer = request.getHeader("Referer");
+        return "redirect:"+ referer;
+    }
 }

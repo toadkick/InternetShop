@@ -20,7 +20,7 @@ public class ProductController {
     @RequestMapping("/AllProductList")
     public ModelAndView showAllProducts() {
         List<Product> productList = productsService.showAllProducts();
-        return new ModelAndView("productList", "list", productList);
+        return new ModelAndView("productListPage", "list", productList);
     }
 
     @RequestMapping("/category")
@@ -38,12 +38,12 @@ public class ProductController {
     @RequestMapping(value = "/category/{id}", method = RequestMethod.GET)
     public ModelAndView productByCat(@PathVariable("id") int id) {
         List<Product> productList = productsService.getProductsByCategory(id);
-        return new ModelAndView("productList", "list", productList);
+        return new ModelAndView("productListPage", "list", productList);
     }
 
     @RequestMapping(value = "/search", method = RequestMethod.GET)
     public ModelAndView search(HttpServletRequest request) {
         List<Product> productList = productsService.getProductsByName(request.getParameter("searchVal"));
-        return new ModelAndView("productList", "list", productList);
+        return new ModelAndView("productListPage", "list", productList);
     }
 }

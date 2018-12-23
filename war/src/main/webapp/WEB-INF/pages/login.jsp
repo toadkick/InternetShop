@@ -18,7 +18,6 @@
 <jsp:include page="_header.jsp"/>
 <jsp:include page="_menu.jsp"/>
 
-<!-- /login?error=true -->
 <c:if test="${param.error == 'true'}">
     <div style="color:red;margin:10px 0px;">
 

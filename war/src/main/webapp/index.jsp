@@ -11,6 +11,7 @@
     <title>Title</title>
 </head>
 <body>
+<h1>WELCOME</h1>
 <jsp:forward page="/WEB-INF/pages/home.jsp"/>
 </body>
 </html>

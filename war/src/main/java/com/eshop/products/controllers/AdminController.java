@@ -19,11 +19,11 @@ public class AdminController {
     private AdminService adminService;
 
     @RequestMapping("/addProduct")
-    public ModelAndView addProduct(@RequestParam("id")int id, @RequestParam("catID")int catID,
+    public ModelAndView addProduct(@RequestParam("catID")int catID,
                                    @RequestParam("name")String name, @RequestParam("author")String author,
                                    @RequestParam("parID")int parID, @RequestParam("price")double price,
                                    @RequestParam("count")int count, @RequestParam("date")int date){
-        adminService.addProduct(id, catID, name, author, parID, price, count, date);
+        adminService.addProduct(catID, name, author, parID, price, count, date);
         return new ModelAndView("editProduct");
     }
 
@@ -34,9 +34,9 @@ public class AdminController {
     }
 
     @RequestMapping("/addCategory")
-    public ModelAndView addCategory(@RequestParam("id")int id, @RequestParam("name")String name,
+    public ModelAndView addCategory(@RequestParam("name")String name,
                                     @RequestParam("par_id")int parID){
-        adminService.addCategory(id, name, parID);
+        adminService.addCategory(name, parID);
         return new ModelAndView("editCategory");
     }
     @RequestMapping("/deleteCategory")

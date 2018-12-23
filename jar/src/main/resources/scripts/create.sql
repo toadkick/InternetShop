@@ -3,13 +3,14 @@ create sequence NEXT_SEQ start with 1000 increment by 1##
 create table shop_users (login varchar2(20) primary key,password varchar2(20) not null,phone varchar2(9),e_mail varchar2(50), enabled NUMBER(1) not null)##
 create table authorities (login varchar2(20),authority varchar2(15))##
 create table cart(login varchar2(20),product_id number,quantity number)##
-create table products(product_id number primary key,category_id number,name varchar2(50),author varchar2(50),parent_id number, price number,quanitity number,year_date number, imgSource VARCHAR2(50))##
+create table products(product_id number primary key,category_id number,name varchar2(50),author varchar2(50),parent_id number, price number,quantity number,year_date number, imgSource VARCHAR2(50))##
 create table category (category_id number primary key,category_name varchar2(20),parent_category_id number)##
 create table product_attribute_value(product_attribute_value_id number primary key,product_id number,attribute_id number,this_value varchar2(10))##
 CREATE table attribute(attribute_id number primary key,attribute_name varchar2(20))##
 alter table authorities add  foreign key (login) references shop_users (login)##
 alter table cart add  foreign key (login) references shop_users (login)##
 alter table cart add  foreign key (product_id) references products (product_id)##
+alter table cart add CONSTRAINT PK_Cart PRIMARY KEY (login, product_id)##
 alter table products add  foreign key (category_id) references category (category_id)##
 alter table product_attribute_value add  foreign key (product_id) references products (product_id)##
 alter table product_attribute_value add  foreign key (attribute_id) references attribute (attribute_id)##
@@ -24,7 +25,7 @@ insert into category values (22,'sci-fi',2)##
 insert into products values(1,1,'Poems','Gomer',null,120,6,2000,'1.jpg')##
 insert into products values(2,11,'Encyclopedic Dictionary','F.Schlegel',null,150,5,2005,'2.jpg')##
 insert into products values(3,11,'The Mirror of Swabia','H.Heine',null,110,10,2008,'3.jpg')##
-insert into products values(4,12,'The Magic Mountain','T.Mann',null,200,1,2010,'4.jpg')##
+insert into products values(4,12,'The Magic Mountain','T.Mann',null,200,10,2010,'4.jpg')##
 insert into products values(5,12,'The Silver Dove','A.Bely',null,50,15,2011,'5.jpg')##
 insert into products values(6,2,'The Dark Tower: The Gunslinger','S.King',null,100,8,2001,'6.jpg')##
 insert into products values(7,2,'The Dark Tower II: The Drawing of the Three','S.King',6,110,7,2001,'7.jpg')##
