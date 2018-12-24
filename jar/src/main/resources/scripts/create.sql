@@ -7,15 +7,15 @@ create table products(product_id number primary key,category_id number,name varc
 create table category (category_id number primary key,category_name varchar2(20),parent_category_id number)##
 create table product_attribute_value(product_attribute_value_id number primary key,product_id number,attribute_id number,this_value varchar2(10))##
 CREATE table attribute(attribute_id number primary key,attribute_name varchar2(20))##
-alter table authorities add  foreign key (login) references shop_users (login)##
-alter table cart add  foreign key (login) references shop_users (login)##
-alter table cart add  foreign key (product_id) references products (product_id)##
+alter table authorities add CONSTRAINT FK_login foreign key (login) references shop_users (login) on delete cascade##
+alter table cart add CONSTRAINT FK_login2 foreign key (login) references shop_users (login) on delete cascade##
+alter table cart add CONSTRAINT FK_Product foreign key (product_id) references products (product_id) on delete cascade##
 alter table cart add CONSTRAINT PK_Cart PRIMARY KEY (login, product_id)##
-alter table products add  foreign key (category_id) references category (category_id)##
-alter table product_attribute_value add  foreign key (product_id) references products (product_id)##
-alter table product_attribute_value add  foreign key (attribute_id) references attribute (attribute_id)##
-alter table category add UNIQUE (category_id,parent_category_id)##
-alter table cart add UNIQUE (login, product_id)##
+alter table products add CONSTRAINT FK_Category  foreign key (category_id) references category (category_id) on delete set null##
+alter table product_attribute_value add CONSTRAINT FK_Product2 foreign key (product_id) references products (product_id) on delete cascade##
+alter table products add CONSTRAINT FK_Parent foreign key (parent_id) references PRODUCTS (PARENT_ID) on delete set cascade##
+alter table category add CONSTRAINT FK_Category2 foreign key (category_id) references category (parent_category_id) on delete set cascade##
+alter table product_attribute_value add CONSTRAINT FK_Attr foreign key (attribute_id) references attribute (attribute_id) on delete cascade##
 insert into category values (1,'classic',null)##
 insert into category values (11, 'romanticism',1)##
 insert into category values (12, 'modernism',1)##

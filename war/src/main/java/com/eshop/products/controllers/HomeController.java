@@ -17,10 +17,6 @@ public class HomeController {
 
     @Autowired
     private ProductsService productsService;
-/*    @RequestMapping("/home")
-    public String home() {
-        return "home";
-    }*/
 
     @RequestMapping("/home")
     public ModelAndView showAllProducts() {

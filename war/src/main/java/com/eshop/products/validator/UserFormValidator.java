@@ -1,12 +1,9 @@
 package com.eshop.products.validator;
 
 import com.eshop.products.entities.Account;
-import com.eshop.products.model.CustomerInfo;
 import com.eshop.products.services.UserService;
 import org.apache.commons.validator.routines.EmailValidator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;

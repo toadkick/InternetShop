@@ -19,7 +19,9 @@ public class ProductDAOImpl implements ProductDAO {
     private JdbcTemplate template;
     private static final String GET_3_PROD = "select * from products where rownum < 4";
     private static final String GET_ALL_PROD = "select * from products WHERE QUANTITY > 0";
-    private static final String GET_ALL_CATEGORY = "select * from CATEGORY";
+    private static final String GET_ALL_CATEGORY =
+            "select category_id, lpad('-', 3*level, '-')||CATEGORY_NAME, parent_category_id from CATEGORY " +
+                    "START WITH parent_category_id is null CONNECT BY PRIOR CATEGORY_ID = PARENT_CATEGORY_ID";
     private static final String GET_PROD_BY_NAME = "select * from products where upper(name) LIKE upper('%'||?||'%')";
     private static final String GET_PROD_BY_CATEGORY = "select * from products where CATEGORY_ID = ?";
     private static final String GET_PROD_BY_ID = "select * from products where product_id = ?";
@@ -69,9 +71,9 @@ public class ProductDAOImpl implements ProductDAO {
         @Override
         public Category mapRow(ResultSet resultSet, int i) throws SQLException {
             Category category = new Category();
-            category.setCategoryID(resultSet.getInt("category_id"));
-            category.setName(resultSet.getString("category_name"));
-            category.setParentID(resultSet.getInt("parent_category_id"));
+            category.setCategoryID(resultSet.getInt(1));
+            category.setName(resultSet.getString(2));
+            category.setParentID(resultSet.getInt(3));
             return category;
         }
     }

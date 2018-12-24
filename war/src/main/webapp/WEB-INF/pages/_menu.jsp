@@ -30,20 +30,23 @@
             </li>
 
             <sec:authorize access="hasRole('ROLE_ADMIN')">
-                <li class="nav-item">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/addCategory">Add category</a>
-                </li>
+                <%--                  <li class="nav-item">
+                                    <a class="nav-link" href="${pageContext.request.contextPath}/addAdminCategory">Add category</a>
+                                </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/addProduct">Add category</a>
-                </li>
+                              <li class="nav-item">
+                                    <a class="nav-link" href="${pageContext.request.contextPath}/addAdminProduct">Add product</a>
+                                </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/editCategory">Edit category</a>
-                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="${pageContext.request.contextPath}/editAdminCategory">Edit category</a>
+                                </li>
 
+                                <li class="nav-item">
+                                    <a class="nav-link" href="${pageContext.request.contextPath}/editAdminProduct">Edit product</a>
+                                </li>--%>
                 <li class="nav-item">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/editProduct">Edit category</a>
+                    <a class="nav-link" href="${pageContext.request.contextPath}/categoryManager">Category Manager</a>
                 </li>
             </sec:authorize>
 
