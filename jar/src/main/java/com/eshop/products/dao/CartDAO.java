@@ -12,4 +12,5 @@ public interface CartDAO {
     void updateCart(String login, int id, int value);
     void updateProd(int id, int value);
     void buy(String login);
+    void updateProductCountAfterRemoveFromCart(int productID, String login);
 }

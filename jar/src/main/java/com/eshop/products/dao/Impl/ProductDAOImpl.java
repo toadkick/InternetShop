@@ -17,15 +17,21 @@ import java.util.List;
 @Repository
 public class ProductDAOImpl implements ProductDAO {
     private JdbcTemplate template;
-    private static final String GET_3_PROD = "select * from products where rownum < 4";
-    private static final String GET_ALL_PROD = "select * from products WHERE QUANTITY > 0";
+    private static final String GET_3_PROD = "select * from products where rownum < 4 ORDER BY QUANTITY desc";
+    private static final String GET_ALL_PROD = "select * from products";
     private static final String GET_ALL_CATEGORY =
             "select category_id, lpad('-', 3*level, '-')||CATEGORY_NAME, parent_category_id from CATEGORY " +
                     "START WITH parent_category_id is null CONNECT BY PRIOR CATEGORY_ID = PARENT_CATEGORY_ID";
     private static final String GET_PROD_BY_NAME = "select * from products where upper(name) LIKE upper('%'||?||'%')";
     private static final String GET_PROD_BY_CATEGORY = "select * from products where CATEGORY_ID = ?";
     private static final String GET_PROD_BY_ID = "select * from products where product_id = ?";
+    private static final String GET_CAT_BY_ID = "select * from category where category_id = ?";
     private static final String CHECH_AVAILABLE = "select quantity from products where product_id = ?";
+    private static final String GET_ALL_PROD_FOR_ADMIN =
+            "select product_id, category_id, lpad('-', 3*level, '-')||NAME, author, parent_id, " +
+                    "price, quantity, year_date, imgSource from PRODUCTS " +
+                    "START WITH parent_id is null CONNECT BY PRIOR product_id = PARENT_ID";
+
 
     @Autowired
     public void setTemplate(JdbcTemplate template) {
@@ -59,6 +65,16 @@ public class ProductDAOImpl implements ProductDAO {
     @Override
     public Product getProductByID(int id) {
         return template.query(GET_PROD_BY_ID, new Object[] {id}, new ProductRowMap()).get(0);
+    }
+
+    @Override
+    public Category getCategoryByID(int id) {
+        return template.query(GET_CAT_BY_ID, new Object[] {id}, new CategoryMapper()).get(0);
+    }
+
+    @Override
+    public List<Product> getAllProductsForAdmin() {
+        return template.query(GET_ALL_PROD_FOR_ADMIN, new ProductRowMap());
     }
 
     @Override

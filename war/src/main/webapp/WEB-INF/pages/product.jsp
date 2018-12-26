@@ -8,12 +8,15 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="spring" uri="http://java.sun.com/jstl/core" %>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <spring:url value="/addToCart" var="addProductToCart"/>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
 
 
 <html>
 <head>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
+
     <title>Product</title>
 </head>
 <body>
@@ -22,9 +25,13 @@
 <div class="standart">
 <img src="${pageContext.request.contextPath}/resources/image/${product.imgSource}">
     <br/>
+    <c:if test="${product.count > 0}">
     <sec:authorize access="isAuthenticated()">
-    <a href="${addProductToCart}/${product.productID}">Add to cart</a>
-</sec:authorize>
+       <a href="${addProductToCart}/${product.productID}">Add to cart</a>
+    </sec:authorize>
+    </c:if>
+    <c:if test="${product.count < 1}">not available</c:if>
+
 <table border="2">
 <tr>
         <th>ID</th>
@@ -34,7 +41,7 @@
         <th>Price</th>
         <th>Date</th>
     </tr>
-    <c: var = "product" item = "${product}">
+
         <tr>
             <td>${product.productID}</td>
             <td>${product.categoryID}</td>
@@ -43,7 +50,7 @@
             <td>${product.price}</td>
             <td>${product.date}</td>
         </tr>
-    </c:>
+
 </table>
 </div>
 <jsp:include page="_footer.jsp"/>

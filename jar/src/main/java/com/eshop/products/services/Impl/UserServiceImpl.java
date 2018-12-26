@@ -5,6 +5,7 @@ import com.eshop.products.entities.Account;
 import com.eshop.products.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -12,10 +13,12 @@ public class UserServiceImpl implements UserService {
     UserDAO userDAO;
 
     @Override
+    @Transactional
     public void insertUser(String login, String password, String email, String phone) {
         if (userDAO.findByLogin(login) == null)
         {
-            userDAO.insertUser(login, password, email, phone);
+            userDAO.insertUserToShopUser(login, password, email, phone);
+            userDAO.insertUserToAuthorities(login);
         }
     }
 

@@ -1,6 +1,5 @@
 package com.eshop.products.entities;
 
-
 public class Account {
 
     private String login;

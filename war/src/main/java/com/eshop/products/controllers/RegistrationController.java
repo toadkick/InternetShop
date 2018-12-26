@@ -1,7 +1,8 @@
 package com.eshop.products.controllers;
 import com.eshop.products.entities.Account;
 import com.eshop.products.services.UserService;
-import com.eshop.products.validator.UserFormValidator;
+import com.eshop.products.validator.FormValidator;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -18,11 +19,14 @@ import java.util.Map;
 @RequestMapping(value = "/register")
 @SessionAttributes("userForm")
 public class RegistrationController {
+
+    private static final Logger LOGGER = Logger.getLogger(RegistrationController.class);
+
     @Autowired
     UserService userService;
 
     @Autowired
-    UserFormValidator userFormValidator;
+    FormValidator formValidator;
 
     @RequestMapping(method = RequestMethod.GET)
     public String viewRegistration(Map<String, Object> model) {
@@ -35,7 +39,7 @@ public class RegistrationController {
     public String processRegistration(@ModelAttribute("userForm") @Validated Account account,
                                       BindingResult result, SessionStatus status,
                                       Map<String, Object> model) {
-        userFormValidator.validate(account, result);
+        formValidator.validate(account, result);
         if (result.hasErrors()) {
             return "register";
         }

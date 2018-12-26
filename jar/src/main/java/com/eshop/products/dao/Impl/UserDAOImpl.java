@@ -28,8 +28,11 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public void insertUser(String login, String password, String email, String phone) {
+    public void insertUserToShopUser(String login, String password, String email, String phone) {
         template.update(INSERT_USER_TO_SHOP_USER, login, password, phone, email);
+    }
+    @Override
+    public void insertUserToAuthorities(String login) {
         template.update(INSERT_USER_TO_AUTHORITIES, login);
     }
 

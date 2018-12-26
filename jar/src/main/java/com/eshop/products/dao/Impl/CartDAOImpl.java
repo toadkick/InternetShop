@@ -48,13 +48,16 @@ public class CartDAOImpl implements CartDAO {
 
     @Override
     public void addProductInCart(int productID, String login) {
-        template.update(UPDATE_PROD_COUNT_IN_PRODUCTS, 1, productID);
         template.update(UPDATE_PROD_IN_CART, login, productID);
     }
 
     @Override
-    public void removeProductFromCart(int productID, String login) {
+    public void updateProductCountAfterRemoveFromCart(int productID, String login) {
         template.update(UPDATE_PROD_COUNT_IN_PRODUCTS_2, login, productID);
+    }
+
+    @Override
+    public void removeProductFromCart(int productID, String login) {
         template.update(DELETE_PROD_FROM_CART, login, productID);
     }
 
