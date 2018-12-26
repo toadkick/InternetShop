@@ -41,9 +41,12 @@
                     </ul>
                     <div class="card-body">
                         <a href="${showProduct}/${product.productID}" class="card-link">INFO</a>
+                        <c:if test="${product.count > 0}">
                         <sec:authorize access="isAuthenticated()">
                         <a href="${addProductToCart}/${product.productID}" class="card-link">Add to cart</a>
                         </sec:authorize>
+                        </c:if>
+                        <c:if test="${product.count < 1}">not available</c:if>
                     </div>
                 </div>
             </div>

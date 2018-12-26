@@ -36,7 +36,7 @@
         </property>
         <property name="continueOnError" value="true"/>
         <property name="sqlScriptEncoding" value="UTF-8"/>
-        <property name="separator" value="##"/>
+        <property name="separator" value=";"/>
     </bean>
 
     <bean id="dbCleanup" class="org.springframework.jdbc.datasource.init.ResourceDatabasePopulator">
@@ -46,7 +46,7 @@
             </list>
         </property>
         <property name="continueOnError" value="true"/>
-        <property name="separator" value="##"/>
+        <property name="separator" value=";"/>
     </bean>
 
     <bean id="startupScripts" class="org.springframework.jdbc.datasource.init.DataSourceInitializer">

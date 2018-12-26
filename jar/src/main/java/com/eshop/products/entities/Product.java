@@ -1,5 +1,8 @@
 package com.eshop.products.entities;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Product {
     private int productID;
     private int categoryID;

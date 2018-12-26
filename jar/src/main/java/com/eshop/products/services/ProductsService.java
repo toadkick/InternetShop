@@ -10,6 +10,7 @@ public interface ProductsService {
     List<Category> showAllCategories();
     List<Product> getProductsByCategory(int catID);
     Product getProductByID(int id);
+    Category getCategoryByID(int id);
     List<Product> getProductsByName(String productName);
     boolean checkAvailable(int id);
 }

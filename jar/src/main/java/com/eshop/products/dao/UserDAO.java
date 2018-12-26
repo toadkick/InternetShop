@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface UserDAO {
 
-    public Account findByLogin(String login);
-    public void insertUser(String login, String password, String email, String phone);
+    Account findByLogin(String login);
+    void insertUserToShopUser(String login, String password, String email, String phone);
+    void insertUserToAuthorities(String login);
 }

@@ -3,6 +3,7 @@ package com.eshop.products.controllers;
 import com.eshop.products.entities.Cart;
 import com.eshop.products.entities.Product;
 import com.eshop.products.services.CartService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,8 @@ import java.util.List;
 
 @Controller
 public class CartController {
+    private static final Logger LOGGER = Logger.getLogger(CartController.class);
+
 
     @Autowired
     private CartService cartService;

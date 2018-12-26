@@ -1,6 +1,8 @@
 package com.eshop.products.validator;
 
 import com.eshop.products.entities.Account;
+import com.eshop.products.entities.Category;
+import com.eshop.products.entities.Product;
 import com.eshop.products.services.UserService;
 import org.apache.commons.validator.routines.EmailValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +10,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
-public class UserFormValidator implements Validator{
+public class FormValidator implements Validator{
     @Autowired
     UserService userService;
 
@@ -38,5 +40,19 @@ public class UserFormValidator implements Validator{
     public void validateLogin(Object target, Errors errors) {
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "login", "NotEmpty.loginForm.login");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "NotEmpty.loginForm.password");
+    }
+
+    public void validateProduct(Product product, Errors errors) {
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "NotEmpty.productForm.name");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "price", "NotEmpty.productForm.price");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "count", "NotEmpty.productForm.quantity");
+    }
+
+    public void validateCategory(Category category, Errors errors) {
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "NotEmpty.registerForm.login");
+        if (category.getName().length() > 20) {
+            errors.rejectValue("login", "Pattern.categoryForm.name");
+        }
+
     }
 }

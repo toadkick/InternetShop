@@ -1,6 +1,7 @@
 package com.eshop.products.controllers;
 import com.eshop.products.entities.Account;
 import com.eshop.products.services.UserService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.security.core.Authentication;
@@ -19,6 +20,7 @@ import java.security.Principal;
 
 @Controller
 public class UserController {
+    private static final Logger LOGGER = Logger.getLogger(UserController.class);
 
     @Autowired
     public UserService userService;
