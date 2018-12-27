@@ -2,19 +2,20 @@ package com.eshop.products.dao.Impl;
 
 import com.eshop.products.dao.CartDAO;
 import com.eshop.products.entities.*;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowCallbackHandler;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
 @Repository
 public class CartDAOImpl implements CartDAO {
+    private static final Logger LOGGER = Logger.getLogger(CartDAOImpl.class);
+
     private JdbcTemplate template;
     private static final String UPDATE_PROD_IN_CART =
             "MERGE INTO CART t using (SELECT ? as LOGIN, ? as PRODUCT_ID from dual) v " +
@@ -42,7 +43,11 @@ public class CartDAOImpl implements CartDAO {
         List<Cart> carts = null;
         try {
             carts =  template.query(GET_CART, new Object[] {login}, new CartMapper());
-        } catch (EmptyResultDataAccessException e) {}
+        } catch (EmptyResultDataAccessException e) {
+            LOGGER.error("Error during get products from cart for login: " + login, e);
+        } catch (Exception e) {
+            LOGGER.error("Error during get products from cart for login: " + login, e);
+        }
         return carts;
     }
 
