@@ -9,14 +9,23 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * AdminServiceImpl service class organizes work with DAO for admin's features
+ */
 @Service
 public class AdminServiceImpl implements AdminService {
 
-    @Autowired
-    private AdminDAO adminDAO;
-
-    @Autowired
     private ProductDAO productDAO;
+    @Autowired
+    public void setProductDAO(ProductDAO productDAO) {
+        this.productDAO = productDAO;
+    }
+
+    private AdminDAO adminDAO;
+    @Autowired
+    public void setAdminDAO(AdminDAO adminDAO) {
+        this.adminDAO = adminDAO;
+    }
 
     @Override
     public void addProduct(int catID, String name, String author, int parID, double price, int count, int date, String img) {

@@ -12,15 +12,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
-
 import java.util.Map;
 
+/**
+ * RegistrationController  - class-controller for registration process
+ */
 @Controller
 @RequestMapping(value = "/register")
 @SessionAttributes("userForm")
 public class RegistrationController {
-
-    private static final Logger LOGGER = Logger.getLogger(RegistrationController.class);
 
     @Autowired
     UserService userService;

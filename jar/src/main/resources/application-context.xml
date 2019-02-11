@@ -1,27 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:mvc="http://www.springframework.org/schema/mvc"
-       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
        xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd
-       http://www.springframework.org/schema/mvc
-	   http://www.springframework.org/schema/mvc/spring-mvc.xsd
 	   http://www.springframework.org/schema/context
-	   http://www.springframework.org/schema/context/spring-context.xsd
-	   http://www.springframework.org/schema/jdbc
-       http://www.springframework.org/schema/jdbc/spring-jdbc-3.2.xsd ">
+	   http://www.springframework.org/schema/context/spring-context.xsd">
 
     <context:component-scan base-package="com.eshop.products" />
 
     <context:property-placeholder location="classpath:datasource-cfg.properties" />
 
-    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="driverClass" value = "${ds.database-driver}" />
+        <property name="jdbcUrl" value="${ds.url}"/>
+        <property name="user" value = "${ds.username}" />
+        <property name="password" value = "${ds.password}" />
+        <property name="initialPoolSize" value = "3" />
+    </bean>
+
+    <bean id="dataSourceInit" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="${ds.database-driver}"/>
         <property name="url" value="${ds.url}"/>
         <property name="username" value="${ds.username}"/>
         <property name="password" value="${ds.password}"/>
+
     </bean>
 
     <bean id = "jdbcTemplate" class = "org.springframework.jdbc.core.JdbcTemplate">
@@ -50,7 +53,7 @@
     </bean>
 
     <bean id="startupScripts" class="org.springframework.jdbc.datasource.init.DataSourceInitializer">
-        <property name="dataSource"><ref bean="dataSource"/></property>
+        <property name="dataSource"><ref bean="dataSourceInit"/></property>
         <property name="databasePopulator"><ref bean="dbInit"/></property>
         <property name="databaseCleaner"><ref bean="dbCleanup"/></property>
         <property name="enabled" value="true"/>

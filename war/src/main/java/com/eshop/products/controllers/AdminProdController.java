@@ -16,6 +16,9 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * AdminProdController  - class-controller for admin features regarding products
+ */
 @Controller
 @SessionAttributes("modprod")
 public class AdminProdController {

@@ -1,5 +1,5 @@
 create sequence NEXT_SEQ start with 1000 increment by 1;
-create table shop_users (login varchar2(20) primary key,password varchar2(20) not null,phone varchar2(9),e_mail varchar2(50), enabled NUMBER(1) not null);
+create table shop_users (login varchar2(20) primary key, password varchar2(20) not null, phone varchar2(9), e_mail varchar2(50), enabled NUMBER(1) not null);
 create table authorities (login varchar2(20),authority varchar2(15));
 create table cart(login varchar2(20),product_id number,quantity number);
 create table products(product_id number primary key,category_id number,name varchar2(50),author varchar2(50),parent_id number, price number,quantity number,year_date number, imgSource VARCHAR2(50));

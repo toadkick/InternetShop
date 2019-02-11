@@ -1,30 +1,26 @@
 package com.eshop.products.controllers;
-import com.eshop.products.entities.Account;
 import com.eshop.products.entities.Category;
-import com.eshop.products.entities.Product;
 import com.eshop.products.services.AdminService;
 import com.eshop.products.services.ProductsService;
 import com.eshop.products.validator.FormValidator;
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
-
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+
+/**
+ * AdminController  - class-controller for admin features regarding categories
+ */
 
 @Controller
 @SessionAttributes("modcategory")
-
 public class AdminController {
 
-    private static final Logger LOGGER = Logger.getLogger(AdminController.class);
     @Autowired
     FormValidator formValidator;
     @Autowired
@@ -56,7 +52,6 @@ public class AdminController {
         }
         if (category.getCategoryID() > 0) {
             adminService.editCategory(category.getCategoryID(), category.getName(), category.getParentID());
-            LOGGER.info("edit categor" + category.getCategoryID());
             return "redirect:"+ "/categoryManager";
         } else
         adminService.addCategory(category.getName(), category.getParentID());

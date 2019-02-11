@@ -2,19 +2,24 @@ package com.eshop.products.dao.Impl;
 
 import com.eshop.products.dao.CartDAO;
 import com.eshop.products.entities.*;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowCallbackHandler;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * CartDAOImpl class organizes work with database for cart's features
+ */
+
 @Repository
 public class CartDAOImpl implements CartDAO {
+    private static final Logger LOGGER = Logger.getLogger(CartDAOImpl.class);
+
     private JdbcTemplate template;
     private static final String UPDATE_PROD_IN_CART =
             "MERGE INTO CART t using (SELECT ? as LOGIN, ? as PRODUCT_ID from dual) v " +
@@ -37,43 +42,116 @@ public class CartDAOImpl implements CartDAO {
         this.template = template;
     }
 
+    /**
+     * Method for represent user's cart
+     *
+     * @param login User's name
+     * @return products in the cart
+     */
     @Override
     public List<Cart> getProductsInCart(String login) {
         List<Cart> carts = null;
         try {
             carts =  template.query(GET_CART, new Object[] {login}, new CartMapper());
-        } catch (EmptyResultDataAccessException e) {}
+        } catch (EmptyResultDataAccessException e) {
+            LOGGER.error("Error during get products from cart for login: " + login, e);
+        } catch (Exception e) {
+            LOGGER.error("Error during get products from cart for login: " + login, e);
+        }
         return carts;
     }
 
+    /**
+     * Method for adding product to cart
+     *
+     * @param productID Product's ID
+     * @param login User's name
+     */
     @Override
     public void addProductInCart(int productID, String login) {
-        template.update(UPDATE_PROD_IN_CART, login, productID);
+        LOGGER.debug("add product to cart: " + productID + " login " + login);
+        try {
+            template.update(UPDATE_PROD_IN_CART, login, productID);
+        } catch (Exception e) {
+            LOGGER.error("Error during add product to cart for login: " + login + " Product:" + productID, e);
+        }
     }
 
+    /**
+     * Method for updating Product table in database after removing product from cart
+     *
+     * @param productID Product's ID
+     * @param login User's name
+     */
     @Override
     public void updateProductCountAfterRemoveFromCart(int productID, String login) {
-        template.update(UPDATE_PROD_COUNT_IN_PRODUCTS_2, login, productID);
+        LOGGER.debug("updating PRODUCTS table: " + productID + " login " + login);
+        try {
+            template.update(UPDATE_PROD_COUNT_IN_PRODUCTS_2, login, productID);
+        } catch (Exception e) {
+            LOGGER.error("ERROR during updating PRODUCTS table: " + login + " Product:" + productID, e);
+        }
     }
 
+    /**
+     * Method for deleting product from cart
+     *
+     * @param productID Product's ID
+     * @param login User's name
+     */
     @Override
     public void removeProductFromCart(int productID, String login) {
         template.update(DELETE_PROD_FROM_CART, login, productID);
     }
 
+    /**
+     * Method for updating CART table
+     *
+     * @param login User's name
+     * @param id Product's ID
+     * @param value Product's quantity
+     */
     @Override
     public void updateCart(String login, int id, int value) {
-        template.update(UPDATE_CART_COUNT_IN_PRODUCTS, value, id, login);
+        LOGGER.debug("updating CART table: " + id + " login " + login + " value " + value);
+        try {
+            template.update(UPDATE_CART_COUNT_IN_PRODUCTS, value, id, login);
+        } catch (Exception e) {
+            LOGGER.error("ERROR during updating CART table: " + id + " login " + login + " value " + value, e);
+        }
+
     }
+
+    /**
+     * Method for updating PRODUCTS table
+     *
+     * @param id Product's ID
+     * @param value Product's quantity
+     */
 
     @Override
     public void updateProd(int id, int value) {
-        template.update(UPDATE_PROD_COUNT_IN_PRODUCTS, value, id);
+        LOGGER.debug("updating PRODUCTS table: " + id + " value " + value);
+        try {
+            template.update(UPDATE_PROD_COUNT_IN_PRODUCTS, value, id);
+        } catch (Exception e) {
+            LOGGER.error("ERROR during updating PRODUCTS table: " + id + " value " + value, e);
+        }
     }
 
+    /**
+     * Method for updating CART table after buying
+     *
+     * @param login User's name
+     */
     @Override
     public void buy(String login) {
-        template.update(BUY, login);
+        LOGGER.debug("deleting products in CART table for login: " + login);
+        try {
+            template.update(BUY, login);
+        } catch (Exception e) {
+            LOGGER.error("ERROR during deleting products in CART table for login: " + login, e);
+        }
     }
 
     private static final class CartMapper implements RowMapper<Cart> {

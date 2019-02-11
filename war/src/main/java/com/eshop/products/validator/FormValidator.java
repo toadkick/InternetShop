@@ -10,6 +10,9 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
+/**
+ * FormValidator  - class for validating filled fields
+ */
 public class FormValidator implements Validator{
     @Autowired
     UserService userService;
@@ -20,6 +23,12 @@ public class FormValidator implements Validator{
 
     private EmailValidator emailValidator = EmailValidator.getInstance();
 
+    /**
+     * Method for validating registration form
+     *
+     * @param target Account
+     * @param errors Errors
+     */
     public void validate(Object target, Errors errors) {
         Account account = (Account) target;
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "login", "NotEmpty.registerForm.login");
@@ -37,17 +46,24 @@ public class FormValidator implements Validator{
         }
     }
 
-    public void validateLogin(Object target, Errors errors) {
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "login", "NotEmpty.loginForm.login");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "NotEmpty.loginForm.password");
-    }
-
+    /**
+     * Method for validating product's info form
+     *
+     * @param product Product
+     * @param errors Errors
+     */
     public void validateProduct(Product product, Errors errors) {
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "NotEmpty.productForm.name");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "price", "NotEmpty.productForm.price");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "count", "NotEmpty.productForm.quantity");
     }
 
+    /**
+     * Method for validating category's info form
+     *
+     * @param category Category
+     * @param errors Errors
+     */
     public void validateCategory(Category category, Errors errors) {
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "NotEmpty.registerForm.login");
         if (category.getName().length() > 20) {
