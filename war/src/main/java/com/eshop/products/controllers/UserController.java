@@ -1,27 +1,20 @@
 package com.eshop.products.controllers;
 import com.eshop.products.entities.Account;
 import com.eshop.products.services.UserService;
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.bind.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 
+/**
+ * UserController  - class-controller for login process and getting user info
+ */
 @Controller
 public class UserController {
-    private static final Logger LOGGER = Logger.getLogger(UserController.class);
-
     @Autowired
     public UserService userService;
 
@@ -33,8 +26,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/user", method = RequestMethod.GET)
-    public ModelAndView userInfo(final HttpServletRequest request, Principal principal) {
-
+    public ModelAndView userInfo() {
         String login = SecurityContextHolder.getContext().getAuthentication().getName();
         Account user = userService.findByLogin(login);
         return new ModelAndView("user", "user", user);

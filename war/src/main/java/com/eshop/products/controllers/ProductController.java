@@ -5,7 +5,6 @@ import com.eshop.products.entities.Product;
 import com.eshop.products.services.ProductsService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -13,10 +12,11 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+/**
+ * ProductController  - class-controller for show needed product and category
+ */
 @Controller
 public class ProductController {
-    private static final Logger LOGGER = Logger.getLogger(ProductController.class);
-
     @Autowired
     private ProductsService productsService;
 

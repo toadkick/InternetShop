@@ -6,6 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+/**
+ * AdminDAOImpl class organizes work with database for admin's features
+ */
+
 @Repository
 public class AdminDAOImpl implements AdminDAO {
     private static final Logger LOGGER = Logger.getLogger(AdminDAO.class);
@@ -24,16 +28,35 @@ public class AdminDAOImpl implements AdminDAO {
         this.template = template;
     }
 
+    /**
+     * Method for adding product to database
+     *
+     * @param catID Category's ID
+     * @param name Product name
+     * @param author Name of the author
+     * @param parentID Parent's ID
+     * @param price Product's price
+     * @param count Quantity
+     * @param date Date of creation
+     * @param img Image's name
+     */
     @Override
     public void addProduct(int catID, String name, String author, int parentID, double price, int count, int date, String img) {
-        LOGGER.debug("add product values: " + name + ", " + catID + ", " + author + ", " + (parentID == 0 ? null : parentID) + ", " + price + ", " + count + ", " + date + ", " + img);
+        LOGGER.debug("add product values: " + name + ", " + catID + ", " + author + ", " + (parentID == 0 ? null : parentID)
+                + ", " + price + ", " + count + ", " + date + ", " + img);
         try {
             template.update(ADD_PRODUCT, catID, name, author, parentID == 0 ? null : parentID, price, count, date, img);
         } catch (Exception e) {
-            LOGGER.error("error during add product, values: " + name + ", " + catID + ", " + author + ", " + (parentID == 0 ? null : parentID) + ", " + price + ", " + count + ", " + date + ", " + img, e);
+            LOGGER.error("error during add product, values: " + name + ", " + catID + ", " + author + ", " +
+                    (parentID == 0 ? null : parentID) + ", " + price + ", " + count + ", " + date + ", " + img, e);
         }
     }
 
+    /**
+     * Method for deleting product from database
+     *
+     * @param id Product's ID
+     */
     @Override
     public void deleteProduct(int id) {
         LOGGER.debug("delete product  with id:" + id);
@@ -44,6 +67,12 @@ public class AdminDAOImpl implements AdminDAO {
         }
     }
 
+    /**
+     * Method for adding category to database
+     *
+     * @param name Category's name
+     * @param parentID Parent's ID
+     */
     @Override
     public void addCategory(String name, int parentID) {
         LOGGER.debug("add category name:" + name + ", " + "parent id: " + parentID);
@@ -54,6 +83,11 @@ public class AdminDAOImpl implements AdminDAO {
         }
     }
 
+    /**
+     * Method for deleting category from database
+     *
+     * @param id Category's ID
+     */
     @Override
     public void deleteCategory(int id) {
         LOGGER.debug("delete category with id:" + id);
@@ -64,6 +98,13 @@ public class AdminDAOImpl implements AdminDAO {
         }
     }
 
+    /**
+     * Method for editing the category in database
+     *
+     * @param id Category's ID
+     * @param name Category's name
+     * @param parID Parent's ID
+     */
     @Override
     public void editCategory(int id, String name, int parID) {
         LOGGER.debug("edit category with id:" + id + " new name: " + name + "new parent id:" + parID);
@@ -74,6 +115,19 @@ public class AdminDAOImpl implements AdminDAO {
         }
     }
 
+    /**
+     * Method for editing the product in database
+     *
+     * @param id Product's ID
+     * @param catID Category's ID
+     * @param name Product's name
+     * @param author Aythor's name
+     * @param parID Parent's ID
+     * @param price Product's price
+     * @param count Quantity
+     * @param date Date of creation
+     * @param img Image's name
+     */
     @Override
     public void editProduct(int id, int catID, String name, String author, int parID, double price, int count, int date, String img) {
         LOGGER.debug("edit product with id:" + id + " values: "  + name + ", " + catID + ", " + author + ", " +

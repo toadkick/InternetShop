@@ -10,14 +10,23 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+/**
+ * CartServiceImpl service class organizes work with DAO for cart's features
+ */
 @Service
 public class CartServiceImpl implements CartService {
 
-    @Autowired
     private CartDAO cartDAO;
-
     @Autowired
+    public void setCartDAO(CartDAO cartDAO) {
+        this.cartDAO = cartDAO;
+    }
+
     private ProductDAO productDAO;
+    @Autowired
+    public void setProductDAO(ProductDAO productDAO) {
+        this.productDAO = productDAO;
+    }
 
     @Override
     public List<Cart> showAllProductInCart(String login) {
